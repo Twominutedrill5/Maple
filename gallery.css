@@ -1,0 +1,57 @@
+/* ============================
+   Gallery mosaic
+   ============================ */
+
+#gallery {
+  padding-top: 8px;
+}
+
+#gallery > p {
+  color: var(--text);
+  margin-bottom: 24px;
+}
+
+.gallery-mosaic {
+  column-count: 3;
+  column-gap: 16px;
+}
+
+.gallery-mosaic img {
+  width: 100%;
+  display: block;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  break-inside: avoid; /* keeps a photo from splitting across columns */
+  border: 1px solid var(--border);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.gallery-mosaic img:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 900px) {
+  .gallery-mosaic {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-mosaic {
+    column-count: 1;
+  }
+}
+
+/* Clickable site logo in the header — see cart.css for the same rule
+   (duplicated per-page since style.css is shared and not editable here). */
+.site-logo {
+  color: var(--text-h);
+  text-decoration: none;
+}
+
+.site-logo:hover {
+  text-decoration: underline;
+}

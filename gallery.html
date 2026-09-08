@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery | Maple's Dog Grooming</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/gallery.css" />
+    <link rel="stylesheet" href="/cart.css" />
+    <link rel="stylesheet" href="/back-to-top.css" />
+    <style>
+      /* Background image for the gallery page only. */
+      body {
+        background-image: url("/assets/pinkish-background.avif");
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: cover;
+        background-attachment: fixed;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>
+        <a href="/index.html" class="site-logo">
+          <img src="/assets/maple's-logo.png" alt="Maple's Dog Grooming logo" />
+          Maple's Dog Grooming
+        </a>
+      </h1>
+
+      <button
+        class="nav-toggle"
+        id="nav-toggle"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+      <nav id="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/services.html">Services</a></li>
+          <li><a href="/gallery.html" aria-current="page">Gallery</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/contact.html">Book Now</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button
+          class="cart-toggle"
+          id="cart-toggle"
+          aria-label="Open cart"
+          aria-expanded="false"
+          aria-controls="cart-drawer"
+        >
+          🛒 <span class="cart-count" id="cart-count">0</span>
+        </button>
+
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          aria-label="Toggle dark mode"
+        >
+          🌙
+        </button>
+      </div>
+    </header>
+    <main>
+      <section id="gallery">
+        <h2>Gallery</h2>
+        <p>Check out our happy clients!</p>
+
+        <!-- MOSAIC GALLERY
+             Uses CSS multi-column layout (not CSS Grid) so photos of
+             different heights stack naturally like a real mosaic,
+             instead of being forced into equal-height grid cells. -->
+        <div class="gallery-mosaic">
+          <img src="/assets/bernie-haircut.jpg" alt="Bernie after grooming" />
+          <img
+            src="/assets/cocker-spaniel-haircut.jpg"
+            alt="Cocker Spaniel after a haircut"
+          />
+          <img src="/assets/dog-1.jpg" alt="Dog after grooming" />
+          <img
+            src="/assets/dog-grooming-trio.jpg"
+            alt="Three dogs together after grooming"
+          />
+          <img src="/assets/dog-haircut.jpg" alt="Dog with a fresh haircut" />
+          <img src="/assets/dog-haircut-2.jpg" alt="Dog with a fresh haircut" />
+          <img src="/assets/dog-haircut-3.jpg" alt="Dog with a fresh haircut" />
+          <img
+            src="/assets/golden-groom.jpg"
+            alt="Golden Retriever after grooming"
+          />
+          <img
+            src="/assets/happy-dog.jpg"
+            alt="Happy client after their grooming appointment"
+          />
+        </div>
+      </section>
+    </main>
+
+    <!-- Cart drawer -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <aside
+      class="cart-drawer"
+      id="cart-drawer"
+      aria-label="Shopping cart"
+      aria-hidden="true"
+    >
+      <div class="cart-drawer-header">
+        <h2>Your Cart</h2>
+        <button class="cart-close" id="cart-close" aria-label="Close cart">
+          ✕
+        </button>
+      </div>
+
+      <ul class="cart-items" id="cart-items">
+        <li class="cart-empty" id="cart-empty">Your cart is empty.</li>
+      </ul>
+
+      <div class="cart-summary">
+        <div class="cart-subtotal-row">
+          <span>Subtotal</span>
+          <span id="cart-subtotal">$0.00</span>
+        </div>
+        <button class="checkout-btn btn-primary" id="checkout-btn" disabled>
+          Continue to Booking
+        </button>
+        <p class="checkout-note">
+          Checkout books your appointment — payment is collected in person
+          unless noted otherwise.
+        </p>
+      </div>
+    </aside>
+
+    <footer>
+      <!-- Placeholder hrefs — swap in the real profile URLs. -->
+      <div class="social-links" id="social">
+        <a
+          href="#"
+          aria-label="Facebook"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=Facebook,%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=Facebook,%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+        <a
+          href="#"
+          aria-label="Instagram"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=Instagram,%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=Instagram,%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+        <a
+          href="#"
+          aria-label="TikTok"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=TikTok,%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=TikTok,%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+        <a
+          href="#"
+          aria-label="Snapchat"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=Snapchat,%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=Snapchat,%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+        <a
+          href="#"
+          aria-label="X (Twitter)"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=X%20(Twitter),%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=X%20(Twitter),%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+        <a
+          href="#"
+          aria-label="LinkedIn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=LinkedIn,%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=LinkedIn,%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+      </div>
+      <p>&copy; 2024 Maple's Dog Grooming. All rights reserved.</p>
+    </footer>
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+      ↑
+    </button>
+
+    <script src="/theme-toggle.js" defer></script>
+    <script src="/nav-toggle.js" defer></script>
+    <script src="/cart.js" defer></script>
+    <script src="/back-to-top.js" defer></script>
+  </body>
+</html>

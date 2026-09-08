@@ -1,0 +1,161 @@
+/* ============================
+   Booking page layout
+   ============================ */
+
+.booking-main {
+  min-height: auto;
+  padding: 40px 20px;
+  display: block;
+}
+
+.booking-page-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.booking-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: 40px;
+  text-align: left;
+}
+
+.booking-card h2 {
+  margin-bottom: 8px;
+}
+
+.booking-intro {
+  color: var(--text);
+  margin-bottom: 32px;
+}
+
+.booking-section {
+  margin-bottom: 28px;
+}
+
+.booking-section h3 {
+  margin-bottom: 12px;
+}
+
+/* ============================
+   Cart summary
+   ============================ */
+
+.booking-cart-items {
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.booking-cart-items .cart-item,
+.booking-cart-items .cart-empty {
+  padding: 12px 16px;
+}
+
+.booking-cart-items .cart-item:last-child {
+  border-bottom: none;
+}
+
+.booking-cart-items .cart-empty a {
+  color: var(--accent);
+}
+
+.booking-subtotal-row {
+  padding: 0 4px;
+}
+
+/* ============================
+   Date & time picker
+   ============================ */
+
+/* Native date input icon defaults to the OS color scheme (can render
+   white-on-white in light mode), so swap in a fixed brand-colored icon. */
+#booking-date {
+  color-scheme: light;
+}
+
+#booking-date::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23aa3bff'%3E%3Cpath d='M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h1V3a1 1 0 0 1 1-1Zm12 8H5v9h14v-9ZM5 8h14V7h-1v1a1 1 0 1 1-2 0V7H8v1a1 1 0 1 1-2 0V7H5v1Z'/%3E%3C/svg%3E");
+  background-size: 26px 26px;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 26px;
+  height: 26px;
+}
+
+.booking-hint {
+  color: var(--text);
+  font-size: 14px;
+  margin: 4px 0 0;
+}
+
+.time-slot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.time-slot-btn {
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+  border-radius: 999px;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.time-slot-btn:hover {
+  border-color: var(--accent-border);
+}
+
+.time-slot-btn.selected {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ============================
+   Form + confirmation state
+   ============================ */
+
+.booking-form .booking-section:last-of-type {
+  margin-bottom: 20px;
+}
+
+.booking-error {
+  color: #e05252;
+  font-size: 14px;
+  margin: 0 0 16px;
+}
+
+.booking-success {
+  text-align: center;
+  padding: 32px 20px;
+  background: var(--accent-bg);
+  border-radius: 12px;
+}
+
+.booking-success p {
+  color: var(--text);
+  margin-top: 8px;
+}
+
+@media (max-width: 640px) {
+  .booking-card {
+    padding: 28px 20px;
+  }
+}

@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book an Appointment | Maple's Dog Grooming</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/contact-form.css" />
+    <link rel="stylesheet" href="/cart.css" />
+    <link rel="stylesheet" href="/booking.css" />
+    <link rel="stylesheet" href="/back-to-top.css" />
+    <style>
+      /* Background image for the contact/booking page only. */
+      body {
+        background-image: url("/assets/orange-bright-bg.avif");
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: cover;
+        background-attachment: fixed;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>
+        <a href="/index.html" class="site-logo">
+          <img src="/assets/maple's-logo.png" alt="Maple's Dog Grooming logo" />
+          Maple's Dog Grooming
+        </a>
+      </h1>
+
+      <button
+        class="nav-toggle"
+        id="nav-toggle"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+      <nav id="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/services.html">Services</a></li>
+          <li><a href="/gallery.html">Gallery</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/contact.html" aria-current="page">Book Now</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button
+          class="cart-toggle"
+          id="cart-toggle"
+          aria-label="Open cart"
+          aria-expanded="false"
+          aria-controls="cart-drawer"
+        >
+          🛒 <span class="cart-count" id="cart-count">0</span>
+        </button>
+
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          aria-label="Toggle dark mode"
+        >
+          🌙
+        </button>
+      </div>
+    </header>
+
+    <main class="contact-main booking-main">
+      <div class="contact-page-wrap booking-page-wrap">
+        <div class="booking-card">
+          <h2>Book an Appointment</h2>
+          <p class="booking-intro">
+            Pick your services, choose a time, and tell us how to reach you.
+            We'll confirm by phone or email — no payment needed now, we collect
+            that at your visit.
+          </p>
+
+          <!-- CART SUMMARY
+               Reuses the same #cart-items / #cart-empty / #cart-subtotal
+               markup and ids that cart.js already renders into on the
+               Services page drawer, so quantities stay in sync and are
+               still editable right here — no extra JS needed for this part. -->
+          <section
+            class="booking-section"
+            aria-labelledby="booking-cart-heading"
+          >
+            <h3 id="booking-cart-heading">Your Selected Services</h3>
+
+            <ul class="cart-items booking-cart-items" id="cart-items">
+              <li class="cart-empty" id="cart-empty">
+                No services selected yet —
+                <a href="/services.html">visit Services</a> to add some.
+              </li>
+            </ul>
+
+            <div class="cart-subtotal-row booking-subtotal-row">
+              <span>Subtotal</span>
+              <span id="cart-subtotal">$0.00</span>
+            </div>
+          </section>
+
+          <!-- DATE & TIME
+               Front-end only for now — no real backend or availability
+               check. Slots are a fixed list; selecting one just highlights
+               it until booking.js is wired up to something real. -->
+          <section
+            class="booking-section"
+            aria-labelledby="booking-datetime-heading"
+          >
+            <h3 id="booking-datetime-heading">Choose a Date &amp; Time</h3>
+
+            <label class="input-group" for="booking-date">
+              <span class="input-icon" aria-hidden="true">📅</span>
+              <input type="date" id="booking-date" name="date" required />
+            </label>
+
+            <p class="booking-hint" id="booking-date-hint">
+              Pick a date to see available times.
+            </p>
+
+            <div
+              class="time-slot-grid"
+              id="time-slot-grid"
+              role="group"
+              aria-label="Available times"
+            ></div>
+          </section>
+
+          <!-- YOUR INFO -->
+          <form class="contact-form booking-form" id="booking-form">
+            <section
+              class="booking-section"
+              aria-labelledby="booking-info-heading"
+            >
+              <h3 id="booking-info-heading">Your Information</h3>
+
+              <label class="input-group">
+                <span class="input-icon" aria-hidden="true">👤</span>
+                <input
+                  type="text"
+                  name="name"
+                  id="booking-name"
+                  placeholder="Your Name"
+                  required
+                />
+              </label>
+
+              <label class="input-group">
+                <span class="input-icon" aria-hidden="true">📞</span>
+                <input
+                  type="tel"
+                  name="phone"
+                  id="booking-phone"
+                  placeholder="Phone Number"
+                  required
+                />
+              </label>
+
+              <label class="input-group">
+                <span class="input-icon" aria-hidden="true">✉️</span>
+                <input
+                  type="email"
+                  name="email"
+                  id="booking-email"
+                  placeholder="Email"
+                  required
+                />
+              </label>
+
+              <label class="input-group input-group--textarea">
+                <span class="input-icon" aria-hidden="true">🐾</span>
+                <textarea
+                  name="notes"
+                  id="booking-notes"
+                  placeholder="Anything we should know about your pup? (optional)"
+                  rows="3"
+                ></textarea>
+              </label>
+            </section>
+
+            <p class="booking-error" id="booking-error" hidden></p>
+
+            <button type="submit" class="btn-submit">
+              Confirm Appointment <span aria-hidden="true">→</span>
+            </button>
+          </form>
+
+          <div class="booking-success" id="booking-success" hidden>
+            <h3>Thanks, <span id="booking-success-name">there</span>!</h3>
+            <p>
+              We've got your request for
+              <strong id="booking-success-datetime"></strong>. We'll reach out
+              shortly to confirm — no need to do anything else for now.
+            </p>
+          </div>
+        </div>
+
+        <div class="contact-details">
+          <div class="contact-detail">
+            <h3>Hours</h3>
+            <p>Tue–Sat: 9am–5pm</p>
+            <p>Closed Sun &amp; Mon</p>
+          </div>
+          <div class="contact-detail">
+            <h3>Phone</h3>
+            <p><a href="tel:+15555555555">(555) 555-5555</a></p>
+          </div>
+          <div class="contact-detail">
+            <h3>Address</h3>
+            <p>123 Maple Street, Your Town, ST 00000</p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <!-- Placeholder hrefs — swap in the real profile URLs. -->
+      <div class="social-links" id="social">
+        <a
+          href="#"
+          aria-label="Facebook"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=Facebook,%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=Facebook,%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+        <a
+          href="#"
+          aria-label="Instagram"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=Instagram,%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=Instagram,%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+        <a
+          href="#"
+          aria-label="TikTok"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=TikTok,%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=TikTok,%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+        <a
+          href="#"
+          aria-label="Snapchat"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=Snapchat,%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=Snapchat,%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+        <a
+          href="#"
+          aria-label="X (Twitter)"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=X%20(Twitter),%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=X%20(Twitter),%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+        <a
+          href="#"
+          aria-label="LinkedIn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=LinkedIn,%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=LinkedIn,%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+      </div>
+      <p>&copy; 2024 Maple's Dog Grooming. All rights reserved.</p>
+    </footer>
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+      ↑
+    </button>
+
+    <script src="/theme-toggle.js" defer></script>
+    <script src="/nav-toggle.js" defer></script>
+    <script src="/cart.js" defer></script>
+    <script src="/booking.js" defer></script>
+    <script src="/back-to-top.js" defer></script>
+  </body>
+</html>

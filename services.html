@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services | Maple's Dog Grooming</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/cart.css" />
+    <link rel="stylesheet" href="/back-to-top.css" />
+    <style>
+      /* Closing CTA — styled the same way as index.html's #home-cta,
+         so it adapts to dark mode automatically via --accent-bg. */
+      #services-cta {
+        text-align: center;
+        padding: 32px 20px;
+        background: var(--accent-bg);
+        border-radius: 12px;
+      }
+
+      #services-cta p {
+        color: var(--text);
+        margin-bottom: 20px;
+      }
+
+      /* Background image for the services page only. */
+      body {
+        background-image: url("/assets/grooming-bg.avif");
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: cover;
+        background-attachment: fixed;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>
+        <a href="/index.html" class="site-logo">
+          <img src="/assets/maple's-logo.png" alt="Maple's Dog Grooming logo" />
+          Maple's Dog Grooming
+        </a>
+      </h1>
+
+      <button
+        class="nav-toggle"
+        id="nav-toggle"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+      <nav id="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/services.html" aria-current="page">Services</a></li>
+          <li><a href="/gallery.html">Gallery</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/contact.html">Book Now</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button
+          class="cart-toggle"
+          id="cart-toggle"
+          aria-label="Open cart"
+          aria-expanded="false"
+          aria-controls="cart-drawer"
+        >
+          🛒 <span class="cart-count" id="cart-count">0</span>
+        </button>
+
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          aria-label="Toggle dark mode"
+        >
+          🌙
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section id="services">
+        <h2>Our Services</h2>
+        <p>
+          We offer a variety of grooming services for your pets. Add the
+          services you'd like to your cart, then head to booking to pick a time
+          that works for you.
+        </p>
+
+        <div class="service-grid">
+          <article class="service-card" data-service-id="full-bath-trim">
+            <div class="service-card-body">
+              <h3>Full Bath &amp; Trim</h3>
+              <p>
+                A complete refresh: shampoo and conditioning bath, blow-dry,
+                full-body trim or breed-standard cut, ear cleaning, and a light
+                brush-out finish.
+              </p>
+              <ul class="service-meta">
+                <li>Approx. 90–120 min</li>
+                <li>All coat types</li>
+              </ul>
+            </div>
+            <div class="service-card-footer">
+              <span class="service-price" data-price="65">$65</span>
+              <div
+                class="cart-action"
+                data-service-id="full-bath-trim"
+                data-name="Full Bath &amp; Trim"
+                data-price="65"
+              >
+                <button class="add-to-cart btn-primary">Add to Cart</button>
+                <div class="qty-stepper" hidden>
+                  <button
+                    class="qty-btn"
+                    data-action="dec"
+                    aria-label="Decrease quantity"
+                  >
+                    −
+                  </button>
+                  <span class="qty-value">1</span>
+                  <button
+                    class="qty-btn"
+                    data-action="inc"
+                    aria-label="Increase quantity"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="service-card" data-service-id="nail-trimming">
+            <div class="service-card-body">
+              <h3>Nail Trimming</h3>
+              <p>
+                Quick, careful nail trim and filing to keep paws comfortable and
+                floors scratch-free. Great as a standalone visit or add-on.
+              </p>
+              <ul class="service-meta">
+                <li>Approx. 15 min</li>
+                <li>Great as an add-on</li>
+              </ul>
+            </div>
+            <div class="service-card-footer">
+              <span class="service-price" data-price="15">$15</span>
+              <div
+                class="cart-action"
+                data-service-id="nail-trimming"
+                data-name="Nail Trimming"
+                data-price="15"
+              >
+                <button class="add-to-cart btn-primary">Add to Cart</button>
+                <div class="qty-stepper" hidden>
+                  <button
+                    class="qty-btn"
+                    data-action="dec"
+                    aria-label="Decrease quantity"
+                  >
+                    −
+                  </button>
+                  <span class="qty-value">1</span>
+                  <button
+                    class="qty-btn"
+                    data-action="inc"
+                    aria-label="Increase quantity"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="service-card" data-service-id="puppy-first-groom">
+            <div class="service-card-body">
+              <h3>Puppy's First Cut &amp; Bath</h3>
+              <p>
+                A gentle, patient introduction to grooming for puppies under 6
+                months. Short, calm session focused on building positive
+                associations, with a light trim and bath.
+              </p>
+              <ul class="service-meta">
+                <li>Approx. 45 min</li>
+                <li>For puppies under 6 months</li>
+              </ul>
+            </div>
+            <div class="service-card-footer">
+              <span class="service-price" data-price="40">$40</span>
+              <div
+                class="cart-action"
+                data-service-id="puppy-first-groom"
+                data-name="Puppy's First Cut &amp; Bath"
+                data-price="40"
+              >
+                <button class="add-to-cart btn-primary">Add to Cart</button>
+                <div class="qty-stepper" hidden>
+                  <button
+                    class="qty-btn"
+                    data-action="dec"
+                    aria-label="Decrease quantity"
+                  >
+                    −
+                  </button>
+                  <span class="qty-value">1</span>
+                  <button
+                    class="qty-btn"
+                    data-action="inc"
+                    aria-label="Increase quantity"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="service-card" data-service-id="brushing">
+            <div class="service-card-body">
+              <h3>Brushing &amp; De-Shedding</h3>
+              <p>
+                Thorough brush-out to remove loose fur, reduce shedding, and
+                prevent matting. A good refresher between full grooms.
+              </p>
+              <ul class="service-meta">
+                <li>Approx. 20–30 min</li>
+                <li>Recommended every 2–4 weeks</li>
+              </ul>
+            </div>
+            <div class="service-card-footer">
+              <span class="service-price" data-price="20">$20</span>
+              <div
+                class="cart-action"
+                data-service-id="brushing"
+                data-name="Brushing &amp; De-Shedding"
+                data-price="20"
+              >
+                <button class="add-to-cart btn-primary">Add to Cart</button>
+                <div class="qty-stepper" hidden>
+                  <button
+                    class="qty-btn"
+                    data-action="dec"
+                    aria-label="Decrease quantity"
+                  >
+                    −
+                  </button>
+                  <span class="qty-value">1</span>
+                  <button
+                    class="qty-btn"
+                    data-action="inc"
+                    aria-label="Increase quantity"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <p class="pricing-note">
+          Prices shown are starting rates and may vary based on your dog's size,
+          coat condition, and temperament. Final pricing is confirmed before
+          your appointment.
+        </p>
+      </section>
+
+      <section id="services-cta" aria-labelledby="services-cta-heading">
+        <h2 id="services-cta-heading">Ready to Get Started?</h2>
+        <p>Book your dog's next groom in just a couple of minutes.</p>
+        <a href="/contact.html" class="btn-primary">Book Now</a>
+      </section>
+    </main>
+
+    <!-- Cart drawer -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <aside
+      class="cart-drawer"
+      id="cart-drawer"
+      aria-label="Shopping cart"
+      aria-hidden="true"
+    >
+      <div class="cart-drawer-header">
+        <h2>Your Cart</h2>
+        <button class="cart-close" id="cart-close" aria-label="Close cart">
+          ✕
+        </button>
+      </div>
+
+      <ul class="cart-items" id="cart-items">
+        <li class="cart-empty" id="cart-empty">Your cart is empty.</li>
+      </ul>
+
+      <div class="cart-summary">
+        <div class="cart-subtotal-row">
+          <span>Subtotal</span>
+          <span id="cart-subtotal">$0.00</span>
+        </div>
+        <button class="checkout-btn btn-primary" id="checkout-btn" disabled>
+          Continue to Booking
+        </button>
+        <p class="checkout-note">
+          Checkout books your appointment — payment is collected in person
+          unless noted otherwise.
+        </p>
+      </div>
+    </aside>
+
+    <footer>
+      <!-- Placeholder hrefs — swap in the real profile URLs. -->
+      <div class="social-links" id="social">
+        <a
+          href="#"
+          aria-label="Facebook"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=Facebook,%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=Facebook,%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+        <a
+          href="#"
+          aria-label="Instagram"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=Instagram,%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=Instagram,%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+        <a
+          href="#"
+          aria-label="TikTok"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=TikTok,%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=TikTok,%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+        <a
+          href="#"
+          aria-label="Snapchat"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=Snapchat,%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=Snapchat,%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+        <a
+          href="#"
+          aria-label="X (Twitter)"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=X%20(Twitter),%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=X%20(Twitter),%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+        <a
+          href="#"
+          aria-label="LinkedIn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=LinkedIn,%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=LinkedIn,%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+      </div>
+      <p>&copy; 2024 Maple's Dog Grooming. All rights reserved.</p>
+    </footer>
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+      ↑
+    </button>
+
+    <script src="/theme-toggle.js" defer></script>
+    <script src="/nav-toggle.js" defer></script>
+    <script src="/cart.js" defer></script>
+    <script src="/back-to-top.js" defer></script>
+  </body>
+</html>

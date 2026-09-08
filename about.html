@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About | Maple's Dog Grooming</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/cart.css" />
+    <link rel="stylesheet" href="/back-to-top.css" />
+    <style>
+      /* Keeps paragraphs from stretching edge-to-edge on wide screens —
+         long unconstrained line lengths are a big part of what reads as
+         "empty" space. Move into style.css once you're happy with it. */
+      #about {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 32px 20px 0;
+        text-align: left;
+      }
+
+      /* Styled the same way #trust already is, so it automatically
+         adapts to dark mode via --accent-bg — no extra overrides needed. */
+      .cta {
+        text-align: center;
+        margin: 40px 0;
+        padding: 32px 20px;
+        border-radius: 12px;
+        background: var(--accent-bg);
+      }
+
+      .cta h3 {
+        margin-bottom: 6px;
+      }
+
+      .cta p {
+        margin-bottom: 20px;
+        color: var(--text);
+      }
+
+      /* Clickable site logo in the header. */
+      .site-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--text-h);
+        text-decoration: none;
+      }
+
+      .site-logo img {
+        height: 40px;
+        width: auto;
+      }
+
+      .site-logo:hover {
+        text-decoration: underline;
+      }
+
+      /* Background image for the about page only. */
+      body {
+        background-image: url("/assets/purple-orange-bg.avif");
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: cover;
+        background-attachment: fixed;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>
+        <a href="/index.html" class="site-logo">
+          <img src="/assets/maple's-logo.png" alt="Maple's Dog Grooming logo" />
+          Maple's Dog Grooming
+        </a>
+      </h1>
+
+      <button
+        class="nav-toggle"
+        id="nav-toggle"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+      <nav id="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/services.html">Services</a></li>
+          <li><a href="/gallery.html">Gallery</a></li>
+          <li><a href="/about.html" aria-current="page">About</a></li>
+          <li><a href="/contact.html">Book Now</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button
+          class="cart-toggle"
+          id="cart-toggle"
+          aria-label="Open cart"
+          aria-expanded="false"
+          aria-controls="cart-drawer"
+        >
+          🛒 <span class="cart-count" id="cart-count">0</span>
+        </button>
+
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          aria-label="Toggle dark mode"
+        >
+          🌙
+        </button>
+      </div>
+    </header>
+    <main>
+      <section id="about">
+        <h2>About Us</h2>
+
+        <!-- PLACEHOLDER COPY — swap in the real story, names, and dates
+             once the client confirms details. -->
+        <p>
+          Maple's Dog Grooming started with a simple idea: every dog deserves to
+          feel calm, comfortable, and cared for during grooming — not rushed
+          through it. What began as grooming appointments for neighbors and
+          friends has grown into a full-service studio built on the same
+          philosophy: patient hands, low-stress handling, and genuine attention
+          to each dog's individual needs.
+        </p>
+
+        <img
+          src="/assets/pexels-goochie-poochie-19145897.jpg"
+          alt="Dog Grooming"
+        />
+
+        <h3>Our Approach</h3>
+        <p>
+          We believe grooming should be a positive experience, not a stressful
+          one. Every appointment is paced to the dog in the chair — whether
+          that's a confident regular or a nervous first-timer — using gentle
+          handling, frequent breaks, and plenty of reassurance along the way.
+        </p>
+
+        <h3>Meet the Groomer</h3>
+        <p>
+          [Placeholder: name, years of experience, certifications, and a
+          sentence or two on what got them into grooming — e.g. "Maple has been
+          grooming dogs for over 10 years and is certified in breed-specific
+          styling and canine first aid."]
+        </p>
+
+        <h3>Our Mission</h3>
+        <p>
+          To give every dog a safe, comfortable grooming experience and every
+          owner peace of mind — one appointment at a time.
+        </p>
+
+        <div class="cta">
+          <h3>Ready to Book Maple's Next Groom?</h3>
+          <p>Get in touch and we'll find a time that works for you.</p>
+          <a class="btn-primary" href="/contact.html">Book an Appointment</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Cart drawer -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <aside
+      class="cart-drawer"
+      id="cart-drawer"
+      aria-label="Shopping cart"
+      aria-hidden="true"
+    >
+      <div class="cart-drawer-header">
+        <h2>Your Cart</h2>
+        <button class="cart-close" id="cart-close" aria-label="Close cart">
+          ✕
+        </button>
+      </div>
+
+      <ul class="cart-items" id="cart-items">
+        <li class="cart-empty" id="cart-empty">Your cart is empty.</li>
+      </ul>
+
+      <div class="cart-summary">
+        <div class="cart-subtotal-row">
+          <span>Subtotal</span>
+          <span id="cart-subtotal">$0.00</span>
+        </div>
+        <button class="checkout-btn btn-primary" id="checkout-btn" disabled>
+          Continue to Booking
+        </button>
+        <p class="checkout-note">
+          Checkout books your appointment — payment is collected in person
+          unless noted otherwise.
+        </p>
+      </div>
+    </aside>
+
+    <footer>
+      <!-- Placeholder hrefs — swap in the real profile URLs. -->
+      <div class="social-links" id="social">
+        <a
+          href="#"
+          aria-label="Facebook"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=Facebook,%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=Facebook,%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+        <a
+          href="#"
+          aria-label="Instagram"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=Instagram,%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=Instagram,%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+        <a
+          href="#"
+          aria-label="TikTok"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=TikTok,%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=TikTok,%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+        <a
+          href="#"
+          aria-label="Snapchat"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=Snapchat,%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=Snapchat,%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+        <a
+          href="#"
+          aria-label="X (Twitter)"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=X%20(Twitter),%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=X%20(Twitter),%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+        <a
+          href="#"
+          aria-label="LinkedIn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/socials/Platform=LinkedIn,%20Color=Original.png"
+            alt=""
+            class="social-icon social-icon-light"
+          />
+          <img
+            src="/socials/Platform=LinkedIn,%20Color=Negative.png"
+            alt=""
+            class="social-icon social-icon-dark"
+          />
+        </a>
+      </div>
+      <p>&copy; 2024 Maple's Dog Grooming. All rights reserved.</p>
+    </footer>
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+      ↑
+    </button>
+
+    <script src="/theme-toggle.js" defer></script>
+    <script src="/nav-toggle.js" defer></script>
+    <script src="/cart.js" defer></script>
+    <script src="/back-to-top.js" defer></script>
+  </body>
+</html>
