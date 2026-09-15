@@ -5,42 +5,53 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Services | Maple's Dog Grooming</title>
+    <meta
+      name="description"
+      content="Grooming services and pricing at Maple's Dog Grooming — full bath and trim, nail trimming, puppy's first groom, and de-shedding. Add services to your cart and book online."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="/cart.css" />
     <link rel="stylesheet" href="/back-to-top.css" />
+    <link rel="stylesheet" href="/follow-us.css" />
     <style>
-      /* Closing CTA — styled the same way as index.html's #home-cta,
-         so it adapts to dark mode automatically via --accent-bg. */
+      /* Closing CTA — a .band-cream card like the home page's; panel shape
+         and text colors come from style.css. */
       #services-cta {
         text-align: center;
-        padding: 32px 20px;
-        background: var(--accent-bg);
-        border-radius: 12px;
       }
 
       #services-cta p {
-        color: var(--text);
         margin-bottom: 20px;
       }
 
-      /* Background image for the services page only. */
-      body {
-        background-image: url("/assets/grooming-bg.avif");
-        background-repeat: no-repeat;
-        background-position: top center;
-        background-size: cover;
-        background-attachment: fixed;
+      /* Four services with paragraph-length descriptions read better two
+         across than four cramped columns. Scoped to this page so the home
+         page's four-up preview grid is unaffected. */
+      #services .service-grid {
+        /* 560px keeps this a 2x2 in the wider content column — at 400px
+           three columns fit and the fourth card is orphaned on its own row.
+           min(..., 100%) so the column can still collapse on phones, where
+           a bare minimum would push the cards off-screen. */
+        grid-template-columns: repeat(auto-fit, minmax(min(560px, 100%), 1fr));
       }
     </style>
   </head>
   <body>
     <header>
-      <h1>
-        <a href="/index.html" class="site-logo">
-          <img src="/assets/maple's-logo.png" alt="Maple's Dog Grooming logo" />
-          Maple's Dog Grooming
-        </a>
-      </h1>
+      <p class="site-title">
+        <a
+          href="/index.html"
+          class="site-logo"
+          aria-label="Maple's Dog Grooming — home"
+          >Maple's</a
+        >
+      </p>
 
       <button
         class="nav-toggle"
@@ -57,11 +68,13 @@
           <li><a href="/services.html" aria-current="page">Services</a></li>
           <li><a href="/gallery.html">Gallery</a></li>
           <li><a href="/about.html">About</a></li>
-          <li><a href="/contact.html">Book Now</a></li>
+          <li><a href="/contact.html">Contact</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
+        <a href="/contact.html" class="btn-nav">Book Now</a>
+
         <button
           class="cart-toggle"
           id="cart-toggle"
@@ -71,29 +84,24 @@
         >
           🛒 <span class="cart-count" id="cart-count">0</span>
         </button>
-
-        <button
-          class="theme-toggle"
-          id="theme-toggle"
-          aria-label="Toggle dark mode"
-        >
-          🌙
-        </button>
       </div>
     </header>
 
     <main>
-      <section id="services">
-        <h2>Our Services</h2>
+      <section class="page-header band-cream">
+        <h1 id="services-heading">Our Services</h1>
         <p>
           We offer a variety of grooming services for your pets. Add the
           services you'd like to your cart, then head to booking to pick a time
           that works for you.
         </p>
+      </section>
 
+      <section id="services" aria-labelledby="services-heading">
         <div class="service-grid">
           <article class="service-card" data-service-id="full-bath-trim">
             <div class="service-card-body">
+              <span class="service-card-icon" aria-hidden="true">🛁</span>
               <h3>Full Bath &amp; Trim</h3>
               <p>
                 A complete refresh: shampoo and conditioning bath, blow-dry,
@@ -137,6 +145,7 @@
 
           <article class="service-card" data-service-id="nail-trimming">
             <div class="service-card-body">
+              <span class="service-card-icon" aria-hidden="true">🐾</span>
               <h3>Nail Trimming</h3>
               <p>
                 Quick, careful nail trim and filing to keep paws comfortable and
@@ -179,6 +188,7 @@
 
           <article class="service-card" data-service-id="puppy-first-groom">
             <div class="service-card-body">
+              <span class="service-card-icon" aria-hidden="true">🐶</span>
               <h3>Puppy's First Cut &amp; Bath</h3>
               <p>
                 A gentle, patient introduction to grooming for puppies under 6
@@ -222,6 +232,7 @@
 
           <article class="service-card" data-service-id="brushing">
             <div class="service-card-body">
+              <span class="service-card-icon" aria-hidden="true">✨</span>
               <h3>Brushing &amp; De-Shedding</h3>
               <p>
                 Thorough brush-out to remove loose fur, reduce shedding, and
@@ -270,7 +281,11 @@
         </p>
       </section>
 
-      <section id="services-cta" aria-labelledby="services-cta-heading">
+      <section
+        id="services-cta"
+        class="band-cream"
+        aria-labelledby="services-cta-heading"
+      >
         <h2 id="services-cta-heading">Ready to Get Started?</h2>
         <p>Book your dog's next groom in just a couple of minutes.</p>
         <a href="/contact.html" class="btn-primary">Book Now</a>
@@ -312,6 +327,16 @@
     </aside>
 
     <footer>
+      <!-- NAP (name / address / phone) repeated sitewide — local search wants
+           these identical on every page. PLACEHOLDER: swap in the real
+           address, phone and hours. -->
+      <p class="footer-nap">
+        <span class="footer-name">Maple's Dog Grooming</span><br />
+        123 Maple Street, Your Town, ST 00000<br />
+        <a href="tel:+15555555555">(555) 555-5555</a> &middot; Tue–Sat
+        9am–5pm
+      </p>
+
       <!-- Placeholder hrefs — swap in the real profile URLs. -->
       <div class="social-links" id="social">
         <a
@@ -323,12 +348,8 @@
           <img
             src="/socials/Platform=Facebook,%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=Facebook,%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
         <a
@@ -340,12 +361,8 @@
           <img
             src="/socials/Platform=Instagram,%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=Instagram,%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
         <a
@@ -357,12 +374,8 @@
           <img
             src="/socials/Platform=TikTok,%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=TikTok,%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
         <a
@@ -374,12 +387,8 @@
           <img
             src="/socials/Platform=Snapchat,%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=Snapchat,%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
         <a
@@ -391,12 +400,8 @@
           <img
             src="/socials/Platform=X%20(Twitter),%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=X%20(Twitter),%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
         <a
@@ -408,24 +413,40 @@
           <img
             src="/socials/Platform=LinkedIn,%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=LinkedIn,%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
       </div>
-      <p>&copy; 2024 Maple's Dog Grooming. All rights reserved.</p>
+      <p>&copy; 2026 Maple's Dog Grooming. All rights reserved.</p>
     </footer>
+    <!-- href/target/rel are set by follow-us.js once FOLLOW_URL is
+         configured, so this ships as a panel rather than a dead link. -->
+    <a
+      class="follow-us-widget"
+      id="follow-us-widget"
+      aria-label="Follow us on Instagram"
+    >
+      <h3 class="follow-us-heading">Follow Us</h3>
+      <div class="follow-us-photo">
+        <img
+          id="follow-us-photo-img"
+          src="/assets/two_pups.jpg"
+          alt="Recent grooming photo from our gallery"
+        />
+      </div>
+      <div class="follow-us-icons" aria-hidden="true">
+        <img src="/socials/Platform=Instagram,%20Color=Original.png" alt="" />
+        <img src="/socials/Platform=Facebook,%20Color=Original.png" alt="" />
+      </div>
+    </a>
     <button id="back-to-top" class="back-to-top" aria-label="Back to top">
       ↑
     </button>
 
-    <script src="/theme-toggle.js" defer></script>
     <script src="/nav-toggle.js" defer></script>
     <script src="/cart.js" defer></script>
     <script src="/back-to-top.js" defer></script>
+    <script src="/follow-us.js" defer></script>
   </body>
 </html>

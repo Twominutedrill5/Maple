@@ -5,30 +5,33 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Book an Appointment | Maple's Dog Grooming</title>
+    <meta
+      name="description"
+      content="Book an appointment at Maple's Dog Grooming. Pick your services and a time that works for you — we'll confirm by phone or email."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="/contact-form.css" />
     <link rel="stylesheet" href="/cart.css" />
     <link rel="stylesheet" href="/booking.css" />
     <link rel="stylesheet" href="/back-to-top.css" />
-    <style>
-      /* Background image for the contact/booking page only. */
-      body {
-        background-image: url("/assets/orange-bright-bg.avif");
-        background-repeat: no-repeat;
-        background-position: top center;
-        background-size: cover;
-        background-attachment: fixed;
-      }
-    </style>
+    <link rel="stylesheet" href="/follow-us.css" />
   </head>
   <body>
     <header>
-      <h1>
-        <a href="/index.html" class="site-logo">
-          <img src="/assets/maple's-logo.png" alt="Maple's Dog Grooming logo" />
-          Maple's Dog Grooming
-        </a>
-      </h1>
+      <p class="site-title">
+        <a
+          href="/index.html"
+          class="site-logo"
+          aria-label="Maple's Dog Grooming — home"
+          >Maple's</a
+        >
+      </p>
 
       <button
         class="nav-toggle"
@@ -45,11 +48,13 @@
           <li><a href="/services.html">Services</a></li>
           <li><a href="/gallery.html">Gallery</a></li>
           <li><a href="/about.html">About</a></li>
-          <li><a href="/contact.html" aria-current="page">Book Now</a></li>
+          <li><a href="/contact.html" aria-current="page">Contact</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
+        <a href="/contact.html" class="btn-nav">Book Now</a>
+
         <button
           class="cart-toggle"
           id="cart-toggle"
@@ -59,21 +64,13 @@
         >
           🛒 <span class="cart-count" id="cart-count">0</span>
         </button>
-
-        <button
-          class="theme-toggle"
-          id="theme-toggle"
-          aria-label="Toggle dark mode"
-        >
-          🌙
-        </button>
       </div>
     </header>
 
     <main class="contact-main booking-main">
       <div class="contact-page-wrap booking-page-wrap">
         <div class="booking-card">
-          <h2>Book an Appointment</h2>
+          <h1>Book an Appointment</h1>
           <p class="booking-intro">
             Pick your services, choose a time, and tell us how to reach you.
             We'll confirm by phone or email — no payment needed now, we collect
@@ -218,6 +215,16 @@
       </div>
     </main>
     <footer>
+      <!-- NAP (name / address / phone) repeated sitewide — local search wants
+           these identical on every page. PLACEHOLDER: swap in the real
+           address, phone and hours. -->
+      <p class="footer-nap">
+        <span class="footer-name">Maple's Dog Grooming</span><br />
+        123 Maple Street, Your Town, ST 00000<br />
+        <a href="tel:+15555555555">(555) 555-5555</a> &middot; Tue–Sat
+        9am–5pm
+      </p>
+
       <!-- Placeholder hrefs — swap in the real profile URLs. -->
       <div class="social-links" id="social">
         <a
@@ -229,12 +236,8 @@
           <img
             src="/socials/Platform=Facebook,%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=Facebook,%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
         <a
@@ -246,12 +249,8 @@
           <img
             src="/socials/Platform=Instagram,%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=Instagram,%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
         <a
@@ -263,12 +262,8 @@
           <img
             src="/socials/Platform=TikTok,%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=TikTok,%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
         <a
@@ -280,12 +275,8 @@
           <img
             src="/socials/Platform=Snapchat,%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=Snapchat,%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
         <a
@@ -297,12 +288,8 @@
           <img
             src="/socials/Platform=X%20(Twitter),%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=X%20(Twitter),%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
         <a
@@ -314,25 +301,41 @@
           <img
             src="/socials/Platform=LinkedIn,%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=LinkedIn,%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
       </div>
-      <p>&copy; 2024 Maple's Dog Grooming. All rights reserved.</p>
+      <p>&copy; 2026 Maple's Dog Grooming. All rights reserved.</p>
     </footer>
+    <!-- href/target/rel are set by follow-us.js once FOLLOW_URL is
+         configured, so this ships as a panel rather than a dead link. -->
+    <a
+      class="follow-us-widget"
+      id="follow-us-widget"
+      aria-label="Follow us on Instagram"
+    >
+      <h3 class="follow-us-heading">Follow Us</h3>
+      <div class="follow-us-photo">
+        <img
+          id="follow-us-photo-img"
+          src="/assets/two_pups.jpg"
+          alt="Recent grooming photo from our gallery"
+        />
+      </div>
+      <div class="follow-us-icons" aria-hidden="true">
+        <img src="/socials/Platform=Instagram,%20Color=Original.png" alt="" />
+        <img src="/socials/Platform=Facebook,%20Color=Original.png" alt="" />
+      </div>
+    </a>
     <button id="back-to-top" class="back-to-top" aria-label="Back to top">
       ↑
     </button>
 
-    <script src="/theme-toggle.js" defer></script>
     <script src="/nav-toggle.js" defer></script>
     <script src="/cart.js" defer></script>
-    <script src="/booking.js" defer></script>
+    <script src="/back-to-top.js" defer></script>
+    <script src="/follow-us.js" defer></script>
     <script src="/back-to-top.js" defer></script>
   </body>
 </html>

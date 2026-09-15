@@ -14,6 +14,22 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 26px;
+}
+
+/* Cream disc behind the service emoji — gives each card a visual anchor
+   and echoes the step icons on the home page. */
+.service-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--page-cream);
+  font-size: 24px;
+  line-height: 1;
+  margin-bottom: 14px;
 }
 
 .service-card h3 {
@@ -21,19 +37,29 @@
 }
 
 .service-card p {
-  margin: 0 0 12px;
+  margin: 0 0 16px;
 }
 
+/* Duration / suitability read as chips rather than stacked plain lines,
+   so they scan at a glance and carry a little of the brand color. */
 .service-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   list-style: none;
   padding: 0;
-  margin: 0 0 12px;
-  font-size: 14px;
-  color: var(--text);
+  margin: 0 0 20px;
 }
 
 .service-meta li {
-  margin-bottom: 3px;
+  background: var(--page-cream);
+  color: var(--text);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  line-height: 1.3;
+  border-radius: var(--r-full);
+  padding: 6px 12px;
+  margin: 0;
 }
 
 .service-card-footer {
@@ -42,11 +68,16 @@
   justify-content: space-between;
   gap: 12px;
   margin-top: auto;
+  /* Separates the price row from the description above it. */
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
 }
 
+/* The price is what people scan for — give it real weight. */
 .service-price {
-  font-weight: 500;
-  font-size: 18px;
+  font-weight: 600;
+  font-size: var(--fs-xl);
+  letter-spacing: -0.5px;
   color: var(--text-h);
 }
 
@@ -59,7 +90,7 @@
    than the site default so it sits comfortably next to the price. */
 .cart-action .add-to-cart {
   padding: 8px 18px;
-  font-size: 14px;
+  font-size: var(--fs-sm);
   white-space: nowrap;
 }
 
@@ -78,7 +109,7 @@
   gap: 8px;
   border: 1px solid var(--accent-border);
   background: var(--accent-bg);
-  border-radius: 999px;
+  border-radius: var(--r-full);
   padding: 4px 6px;
 }
 
@@ -90,7 +121,7 @@
   cursor: pointer;
   border: none;
   background: var(--accent);
-  color: #fff;
+  color: var(--accent-text);
   border-radius: 50%;
   width: 26px;
   height: 26px;
@@ -106,14 +137,18 @@
   min-width: 18px;
   text-align: center;
   font-weight: 500;
-  font-size: 15px;
+  font-size: var(--fs-sm);
   color: var(--text-h);
 }
 
+/* Plain muted footnote rather than a third peach box on the page — cream
+   panels are reserved for section structure, not for highlighting. */
 .pricing-note {
-  font-size: 14px;
+  font-size: var(--fs-sm);
   color: var(--text);
-  margin-top: 16px;
+  text-align: center;
+  max-width: 700px;
+  margin: 32px auto 0;
 }
 
 /* ============================
@@ -145,9 +180,9 @@
   top: -2px;
   right: -2px;
   background: var(--accent);
-  color: #fff;
-  border-radius: 999px;
-  font-size: 11px;
+  color: var(--accent-text);
+  border-radius: var(--r-full);
+  font-size: var(--fs-xs);
   font-weight: 500;
   padding: 1px 6px;
   min-width: 17px;
@@ -180,6 +215,7 @@
   height: 100%;
   width: min(360px, 100%);
   background: var(--bg);
+  /* Drawer has its own themed surface, independent of the page background image. */
   color: var(--text);
   box-shadow: var(--shadow);
   display: flex;
@@ -203,7 +239,7 @@
 
 .cart-drawer-header h2 {
   margin: 0;
-  font-size: 18px;
+  font-size: var(--fs-md);
 }
 
 .cart-close {
@@ -230,7 +266,7 @@
   padding: 24px 0;
   text-align: center;
   color: var(--text);
-  font-size: 15px;
+  font-size: var(--fs-sm);
 }
 
 .cart-item {
@@ -249,12 +285,12 @@
 
 .cart-item-name {
   font-weight: 500;
-  font-size: 15px;
+  font-size: var(--fs-sm);
   color: var(--text-h);
 }
 
 .cart-item-price {
-  font-size: 14px;
+  font-size: var(--fs-sm);
   color: var(--text);
 }
 
@@ -269,7 +305,7 @@
   border: 1px solid var(--border);
   background: transparent;
   color: var(--text-h);
-  border-radius: 4px;
+  border-radius: var(--r-xs);
   width: 26px;
   height: 26px;
   font-size: 14px;
@@ -283,7 +319,7 @@
 .qty-value {
   min-width: 18px;
   text-align: center;
-  font-size: 14px;
+  font-size: var(--fs-sm);
 }
 
 .remove-item {
@@ -291,7 +327,7 @@
   border: none;
   background: transparent;
   color: #e05252;
-  font-size: 13px;
+  font-size: var(--fs-xs);
   margin-left: 4px;
 }
 
@@ -312,7 +348,7 @@
   width: 100%;
   text-align: center;
   border: none;
-  font-size: 15px;
+  font-size: var(--fs-sm);
 }
 
 .checkout-btn:disabled {
@@ -324,7 +360,7 @@
 }
 
 .checkout-note {
-  font-size: 12px;
+  font-size: var(--fs-xs);
   color: var(--text);
   margin: 8px 0 0;
   text-align: center;
@@ -340,4 +376,26 @@
 
 .site-logo:hover {
   text-decoration: underline;
+}
+
+/* Page behind the cart drawer must not scroll while it is open. */
+body.has-overlay {
+  overflow: hidden;
+}
+
+/* ============================
+   Focus states
+   ============================ */
+
+/* The cart drawer's controls carried no focus ring, and several set their
+   own background, which can wash out the browser default. */
+.cart-toggle:focus-visible,
+.cart-close:focus-visible,
+.qty-btn:focus-visible,
+.cart-action .qty-btn:focus-visible,
+.remove-item:focus-visible,
+.checkout-btn:focus-visible {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 2px;
+  border-radius: var(--r-xs);
 }

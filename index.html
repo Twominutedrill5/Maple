@@ -14,19 +14,28 @@
       property="og:description"
       content="Professional, gentle dog grooming — baths, full grooms, and nail trims."
     />
-    <meta property="og:image" content="/assets/og-image.jpg" />
+    <meta property="og:image" content="/assets/pup_comb.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="/cart.css" />
     <link rel="stylesheet" href="/back-to-top.css" />
+    <link rel="stylesheet" href="/follow-us.css" />
     <style>
-      /* Closing CTA — styled the same way #trust already is, so it
-         adapts to dark mode automatically via --accent-bg. Move into
-         style.css whenever convenient. */
+      /* Now a block inside the #trust card rather than its own section —
+         no background or radius of its own, so it reads as the closing
+         part of that panel instead of a second, narrower one. */
       #home-cta {
         text-align: center;
-        padding: 32px 20px;
-        background: var(--accent-bg);
-        border-radius: 12px;
+        margin-top: 48px;
+      }
+
+      #home-cta h2 {
+        color: var(--text-h);
       }
 
       #home-cta p {
@@ -34,42 +43,105 @@
         margin-bottom: 20px;
       }
 
-      /* Clickable site logo in the header. */
-      .site-logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        color: var(--text-h);
-        text-decoration: none;
-      }
-
-      .site-logo img {
-        height: 40px;
-        width: auto;
-      }
-
-      .site-logo:hover {
-        text-decoration: underline;
-      }
-
-      /* Trying out a background image for the home page only. */
-      body {
-        background-image: url("/assets/orange-smoke-animated.gif");
-        background-repeat: no-repeat;
-        background-position: top center;
-        background-size: cover;
-        background-attachment: fixed;
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
       }
     </style>
+    <!-- LocalBusiness structured data — this is what feeds Google's local
+         results. PLACEHOLDER: swap the address, phone, URL and geo
+         coordinates for the real ones before launch. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "PetGroomer",
+        "name": "Maple's Dog Grooming",
+        "description": "Gentle, professional dog grooming in a calm, dog-friendly space — baths, full grooms, and nail trims.",
+        "url": "https://www.example.com/",
+        "telephone": "+1-555-555-5555",
+        "priceRange": "$15–$65",
+        "image": "https://www.example.com/assets/pup_comb.jpg",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "123 Maple Street",
+          "addressLocality": "Your Town",
+          "addressRegion": "ST",
+          "postalCode": "00000",
+          "addressCountry": "US"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "opens": "09:00",
+            "closes": "17:00"
+          }
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Grooming Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "price": "65",
+              "priceCurrency": "USD",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Full Bath & Trim"
+              }
+            },
+            {
+              "@type": "Offer",
+              "price": "15",
+              "priceCurrency": "USD",
+              "itemOffered": { "@type": "Service", "name": "Nail Trimming" }
+            },
+            {
+              "@type": "Offer",
+              "price": "40",
+              "priceCurrency": "USD",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Puppy's First Cut & Bath"
+              }
+            },
+            {
+              "@type": "Offer",
+              "price": "20",
+              "priceCurrency": "USD",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Brushing & De-Shedding"
+              }
+            }
+          ]
+        }
+      }
+    </script>
   </head>
   <body>
     <header>
-      <h1>
-        <a href="/index.html" class="site-logo">
-          <img src="/assets/maple's-logo.png" alt="Maple's Dog Grooming logo" />
-          Maple's Dog Grooming
-        </a>
-      </h1>
+      <p class="site-title">
+        <a
+          href="/index.html"
+          class="site-logo"
+          aria-label="Maple's Dog Grooming — home"
+          >Maple's</a
+        >
+      </p>
 
       <button
         class="nav-toggle"
@@ -86,11 +158,13 @@
           <li><a href="/services.html">Services</a></li>
           <li><a href="/gallery.html">Gallery</a></li>
           <li><a href="/about.html">About</a></li>
-          <li><a href="/contact.html">Book Now</a></li>
+          <li><a href="/contact.html">Contact</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
+        <a href="/contact.html" class="btn-nav">Book Now</a>
+
         <button
           class="cart-toggle"
           id="cart-toggle"
@@ -100,46 +174,103 @@
         >
           🛒 <span class="cart-count" id="cart-count">0</span>
         </button>
-
-        <button
-          class="theme-toggle"
-          id="theme-toggle"
-          aria-label="Toggle dark mode"
-        >
-          🌙
-        </button>
       </div>
     </header>
 
     <main>
-      <hero>
-        <video autoplay muted loop playsinline poster="/assets/hero-poster.jpg">
-          <source
-            src="/assets/6132705-uhd_3840_2160_25fps.mp4"
-            type="video/mp4"
-          />
-          Your browser does not support the video tag.
-        </video>
-        <div class="hero-overlay">
-          <h2>Pampering Your Pup, One Groom at a Time</h2>
-          <p>Gentle, professional grooming in a calm, dog-friendly space.</p>
+      <section class="hero-split hero-card">
+        <div class="hero-copy">
+          <span class="hero-eyebrow">🐾 Your Neighborhood Dog Groomer</span>
+          <h1>Maple's Dog Grooming</h1>
+          <p>
+            Gentle, professional grooming in a calm, dog-friendly space —
+            because every dog deserves to feel like family.
+          </p>
           <a href="/contact.html" class="btn-primary">Book an Appointment</a>
+          <p class="hero-stat">🐾 1,000+ happy pups groomed</p>
         </div>
-      </hero>
-
-      <section id="home">
-        <h2>Welcome to Maple's Dog Grooming</h2>
-        <p>
-          Your furry friend's grooming needs are our top priority. From
-          first-time puppy visits to full show cuts, we treat every dog like our
-          own.
-        </p>
+        <div class="hero-media">
+          <img
+            src="/assets/two_pups.jpg"
+            alt="Groomer brushing out a large cream-coated dog in the salon"
+          />
+        </div>
       </section>
 
-      <section id="services-preview" aria-labelledby="services-preview-heading">
+      <section id="how-it-works" aria-labelledby="how-it-works-heading">
+        <h2 id="how-it-works-heading" class="visually-hidden">How It Works</h2>
+        <div class="steps-grid">
+          <div class="step">
+            <span class="step-icon" aria-hidden="true">🐾</span>
+            <h3>Select Service</h3>
+            <p>
+              Choose the service that's right for your dog, from a quick bath to
+              a full groom.
+            </p>
+          </div>
+          <div class="step">
+            <span class="step-icon" aria-hidden="true">📅</span>
+            <h3>Book</h3>
+            <p>
+              Grab a time that works for you — we'll confirm by phone or email.
+            </p>
+          </div>
+          <div class="step">
+            <span class="step-icon" aria-hidden="true">✨</span>
+            <h3>Relax</h3>
+            <p>
+              Drop off your pup and relax — they'll come back happy, clean, and
+              looking great.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="why-us" aria-labelledby="why-us-heading">
+        <h2 id="why-us-heading">Why Maple's Dog Grooming?</h2>
+
+        <div class="features-grid">
+          <div class="feature">
+            <span class="feature-icon" aria-hidden="true">🤍</span>
+            <h3>Personalized, 1-on-1 Sessions</h3>
+            <p>
+              Every appointment is paced to your dog's comfort, in a calm,
+              private space.
+            </p>
+          </div>
+          <div class="feature">
+            <span class="feature-icon" aria-hidden="true">⏱️</span>
+            <h3>Flexible Scheduling</h3>
+            <p>
+              Evening and weekend slots available, so grooming fits your
+              routine.
+            </p>
+          </div>
+          <div class="feature">
+            <span class="feature-icon" aria-hidden="true">🎓</span>
+            <h3>Experienced Groomer</h3>
+            <p>
+              Years of hands-on experience with every breed, coat type, and
+              temperament.
+            </p>
+          </div>
+          <div class="feature">
+            <span class="feature-icon" aria-hidden="true">🌿</span>
+            <h3>Gentle, Natural Products</h3>
+            <p>Skin-friendly shampoos and gear picked for sensitive pups.</p>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="services-preview"
+        class="band-cream"
+        aria-labelledby="services-preview-heading"
+      >
         <h2 id="services-preview-heading">Our Services</h2>
         <div class="service-grid">
           <article class="service-card">
+            <span class="service-icon" aria-hidden="true">🛁</span>
             <h3>Bath &amp; Brush</h3>
             <p>
               A refreshing wash, blow-dry, and brush-out for coats of all
@@ -147,16 +278,19 @@
             </p>
           </article>
           <article class="service-card">
+            <span class="service-icon" aria-hidden="true">✂️</span>
             <h3>Full Groom</h3>
             <p>
               Complete styling — bath, haircut, nail trim, and ear cleaning.
             </p>
           </article>
           <article class="service-card">
+            <span class="service-icon" aria-hidden="true">🐾</span>
             <h3>Nail Trim</h3>
             <p>A quick, low-stress trim to keep paws healthy between visits.</p>
           </article>
           <article class="service-card">
+            <span class="service-icon" aria-hidden="true">🐶</span>
             <h3>Puppy's First Groom</h3>
             <p>
               A gentle introduction to grooming, paced to your puppy's comfort.
@@ -170,36 +304,63 @@
         <h2 id="gallery-teaser-heading">Recent Grooms</h2>
         <div class="gallery-strip">
           <img
-            src="/assets/happy-dog.jpg"
-            alt="Freshly groomed Yorkshire Terrier"
+            style="--focus: 25%"
+            src="/assets/poodle_trim.jpg"
+            alt="Standard poodle being trimmed on the grooming table"
           />
           <img
-            src="/assets/cocker-spaniel-haircut.jpg"
-            alt="Golden Retriever after a bath and brush"
+            loading="lazy"
+            style="--focus: 25%"
+            src="/assets/husky_groom.jpg"
+            alt="Husky being groomed"
           />
           <img
-            src="/assets/golden-groom.jpg"
-            alt="Poodle with a full show trim"
+            loading="lazy"
+            style="--focus: 35%"
+            src="/assets/pup_comb.jpg"
+            alt="Yorkshire terrier being combed out after a groom"
           />
         </div>
         <a href="/gallery.html" class="btn-secondary">View Full Gallery</a>
       </section>
 
-      <section id="trust" aria-labelledby="trust-heading">
-        <h2 id="trust-heading">Trusted by Local Dog Owners</h2>
-        <blockquote>
-          <p>
-            "Maple's is the only place my anxious rescue actually relaxes during
-            grooming. Couldn't recommend them more."
-          </p>
-          <cite>— A regular client</cite>
-        </blockquote>
-      </section>
+      <section id="trust" class="band-cream" aria-labelledby="trust-heading">
+        <h2 id="trust-heading">Don't Take Our Word For It</h2>
+        <div class="testimonial-grid">
+          <blockquote class="testimonial-card">
+            <p class="stars" aria-label="5 out of 5 stars">★★★★★</p>
+            <p class="testimonial-quote">
+              "Maple's is the only place my anxious rescue actually relaxes
+              during grooming. Couldn't recommend them more."
+            </p>
+            <cite>— A regular client</cite>
+          </blockquote>
+          <blockquote class="testimonial-card">
+            <p class="stars" aria-label="5 out of 5 stars">★★★★★</p>
+            <p class="testimonial-quote">
+              "Our puppy's first groom could have been stressful, but the team
+              was so patient and gentle. She came home happy and looking
+              adorable."
+            </p>
+            <cite>— First-time puppy parent</cite>
+          </blockquote>
+          <blockquote class="testimonial-card">
+            <p class="stars" aria-label="5 out of 5 stars">★★★★★</p>
+            <p class="testimonial-quote">
+              "Booking online takes two minutes and my dog always comes back
+              looking (and smelling) amazing. Our go-to groomer now."
+            </p>
+            <cite>— Local dog owner</cite>
+          </blockquote>
+        </div>
 
-      <section id="home-cta" aria-labelledby="home-cta-heading">
-        <h2 id="home-cta-heading">Ready to Get Started?</h2>
-        <p>Book your dog's next groom in just a couple of minutes.</p>
-        <a href="/contact.html" class="btn-primary">Book Now</a>
+        <!-- Nested inside #trust so the CTA sits on the same cream card
+             instead of starting a second panel below it. -->
+        <div id="home-cta">
+          <h2 id="home-cta-heading">Ready to Get Started?</h2>
+          <p>Book your dog's next groom in just a couple of minutes.</p>
+          <a href="/contact.html" class="btn-primary">Book Now</a>
+        </div>
       </section>
     </main>
 
@@ -238,6 +399,15 @@
     </aside>
 
     <footer>
+      <!-- NAP (name / address / phone) repeated sitewide — local search wants
+           these identical on every page. PLACEHOLDER: swap in the real
+           address, phone and hours. -->
+      <p class="footer-nap">
+        <span class="footer-name">Maple's Dog Grooming</span><br />
+        123 Maple Street, Your Town, ST 00000<br />
+        <a href="tel:+15555555555">(555) 555-5555</a> &middot; Tue–Sat 9am–5pm
+      </p>
+
       <!-- Placeholder hrefs — swap in the real profile URLs. -->
       <div class="social-links" id="social">
         <a
@@ -249,12 +419,8 @@
           <img
             src="/socials/Platform=Facebook,%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=Facebook,%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
         <a
@@ -266,12 +432,8 @@
           <img
             src="/socials/Platform=Instagram,%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=Instagram,%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
         <a
@@ -283,12 +445,8 @@
           <img
             src="/socials/Platform=TikTok,%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=TikTok,%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
         <a
@@ -300,12 +458,8 @@
           <img
             src="/socials/Platform=Snapchat,%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=Snapchat,%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
         <a
@@ -317,12 +471,8 @@
           <img
             src="/socials/Platform=X%20(Twitter),%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=X%20(Twitter),%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
         <a
@@ -334,24 +484,40 @@
           <img
             src="/socials/Platform=LinkedIn,%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=LinkedIn,%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
       </div>
-      <p>&copy; 2024 Maple's Dog Grooming. All rights reserved.</p>
+      <p>&copy; 2026 Maple's Dog Grooming. All rights reserved.</p>
     </footer>
+    <!-- href/target/rel are set by follow-us.js once FOLLOW_URL is
+         configured, so this ships as a panel rather than a dead link. -->
+    <a
+      class="follow-us-widget"
+      id="follow-us-widget"
+      aria-label="Follow us on Instagram"
+    >
+      <h3 class="follow-us-heading">Follow Us</h3>
+      <div class="follow-us-photo">
+        <img
+          id="follow-us-photo-img"
+          src="/assets/two_pups.jpg"
+          alt="Recent grooming photo from our gallery"
+        />
+      </div>
+      <div class="follow-us-icons" aria-hidden="true">
+        <img src="/socials/Platform=Instagram,%20Color=Original.png" alt="" />
+        <img src="/socials/Platform=Facebook,%20Color=Original.png" alt="" />
+      </div>
+    </a>
     <button id="back-to-top" class="back-to-top" aria-label="Back to top">
       ↑
     </button>
 
-    <script src="/theme-toggle.js" defer></script>
     <script src="/nav-toggle.js" defer></script>
     <script src="/cart.js" defer></script>
     <script src="/back-to-top.js" defer></script>
+    <script src="/follow-us.js" defer></script>
   </body>
 </html>

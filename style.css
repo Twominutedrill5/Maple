@@ -1,23 +1,65 @@
 :root {
-  --text: #6b6375;
+  --text: #3a3542;
   --text-h: #08060d;
   --bg: #fff;
   --border: #e5e4e7;
   --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
+  --accent: #f2a765;
+  --accent-bg: rgba(242, 167, 101, 0.18);
+  --accent-border: rgba(242, 167, 101, 0.5);
   --social-bg: rgba(244, 243, 236, 0.5);
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
+  /* Peach accent buttons/badges sit on a light fill, so their label is a
+     darker shade than the body text. 8.4:1 on --accent. */
+  --accent-text: #221c14;
+
+  /* The peach itself is only 2:1 on white, so it can never be used as TEXT
+     or as a focus ring. --accent-ink is the same hue and saturation dropped
+     to the lightest value that clears 4.5:1 on white (5.7) and on the cream
+     cards (4.7). Use --accent for fills, --accent-ink for anything a person
+     has to read or see the edge of. */
+  --accent-ink: #a0520d;
+
+  /* Form fields need a boundary you can actually see: --border is 1.1:1
+     against the field fill, which fails WCAG 1.4.11. This is 3.2:1. */
+  --field-border: #8d8880;
+
+  /* Warm cream used by the rounded card sections. */
+  --page-cream: #fbe7d2;
+
+  /* Type scale — 7 steps. Icon/emoji sizes are deliberately NOT on this
+     scale; they size artwork, not text, and live as literal px. */
+  --fs-xs: 13px;
+  --fs-sm: 15px;
+  --fs-md: 18px;
+  --fs-lg: 22px;
+  --fs-xl: 28px;
+  --fs-2xl: 32px;
+  --fs-3xl: 44px;
+
+  /* Width of the content column. One number controls how wide the site
+     runs on a large monitor; the header's side padding tracks it too. */
+  --content-max: 1400px;
+
+  /* Corner radii — 5 steps plus a pill. */
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-xl: 32px;
+  --r-full: 999px;
+
   --sans: system-ui, "Segoe UI", Roboto, sans-serif;
   --heading: system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
+  /* Wordmark only — loaded from Google Fonts in each page's <head>. */
+  --script: "Pacifico", "Brush Script MT", cursive;
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
-  color-scheme: light dark;
+  color-scheme: light;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
@@ -28,57 +70,6 @@
   @media (max-width: 1024px) {
     font-size: 16px;
   }
-}
-
-/* Automatic (OS-level) dark mode */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-/* Manual override via the theme toggle button — takes precedence
-   over the OS-level media query above since it's more specific. */
-:root[data-theme="dark"] {
-  --text: #9ca3af;
-  --text-h: #f3f4f6;
-  --bg: #16171d;
-  --border: #2e303a;
-  --code-bg: #1f2028;
-  --accent: #c084fc;
-  --accent-bg: rgba(192, 132, 252, 0.15);
-  --accent-border: rgba(192, 132, 252, 0.5);
-  --social-bg: rgba(47, 48, 58, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-}
-
-:root[data-theme="light"] {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 }
 
 body {
@@ -93,10 +84,90 @@ main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 64px;
-  max-width: 1100px;
-  margin: 0 auto 64px;
-  padding: 0 20px;
+}
+
+/* Each top-level section is inset to a shared max-width so cream and white
+   sections can alternate without restructuring every section's markup. */
+main > section {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 56px 20px;
+  box-sizing: border-box;
+}
+
+/* ============================
+   CARD SECTIONS
+   ============================ */
+
+/* Every colored section is a rounded "card" floating on the white page —
+   the same shape as the hero — rather than a color band bleeding to the
+   viewport edges. .hero-card and .band-cream share the shape; each adds
+   its own padding and vertical spacing below. */
+.hero-card,
+.band-cream {
+  background: var(--page-cream);
+  border-radius: var(--r-xl);
+  /* Side gutters so the curve stays visible when the viewport is narrower
+     than the content column. */
+  width: calc(100% - 40px);
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--text);
+}
+
+.band-cream {
+  padding: 56px 48px;
+  /* Breathing room so consecutive cards read as separate panels. */
+  margin-block: 24px;
+}
+
+@media (max-width: 1024px) {
+  .hero-card,
+  .band-cream {
+    border-radius: var(--r-lg);
+  }
+
+  .band-cream {
+    padding: 48px 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* main already supplies 20px side padding at this width. */
+  .hero-card,
+  .band-cream {
+    width: 100%;
+    border-radius: var(--r-lg);
+  }
+
+  .band-cream {
+    padding: 40px 24px;
+  }
+}
+
+/* Page-header card: the cream panel that opens an inner page, giving the
+   transparent navbar a surface to sit against the way the hero does on the
+   home page. Pair with .band-cream for the panel itself. */
+.page-header {
+  text-align: center;
+}
+
+.page-header h1 {
+  font-size: var(--fs-2xl);
+  line-height: 118%;
+  margin-bottom: 12px;
+}
+
+.page-header p {
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .page-header h1 {
+    font-size: var(--fs-xl);
+  }
 }
 
 #root {
@@ -120,23 +191,23 @@ h3 {
 }
 
 h1 {
-  font-size: 32px;
+  font-size: var(--fs-2xl);
   letter-spacing: -0.96px;
   margin: 0;
 }
 
 h2 {
-  font-size: 28px;
+  font-size: var(--fs-xl);
   line-height: 118%;
   letter-spacing: -0.24px;
   margin: 0 0 12px;
   @media (max-width: 1024px) {
-    font-size: 22px;
+    font-size: var(--fs-lg);
   }
 }
 
 h3 {
-  font-size: 18px;
+  font-size: var(--fs-md);
   margin: 0 0 8px;
 }
 
@@ -148,12 +219,12 @@ code,
 .counter {
   font-family: var(--mono);
   display: inline-flex;
-  border-radius: 4px;
+  border-radius: var(--r-xs);
   color: var(--text-h);
 }
 
 code {
-  font-size: 15px;
+  font-size: var(--fs-sm);
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
@@ -173,10 +244,10 @@ video {
 .btn-primary {
   display: inline-block;
   background: var(--accent);
-  color: #fff;
+  color: var(--accent-text);
   text-decoration: none;
   padding: 12px 28px;
-  border-radius: 999px;
+  border-radius: var(--r-full);
   font-weight: 500;
   transition:
     transform 0.15s ease,
@@ -196,7 +267,7 @@ video {
 .btn-secondary {
   display: inline-block;
   margin-top: 20px;
-  color: var(--accent);
+  color: var(--accent-ink);
   text-decoration: none;
   font-weight: 500;
   border-bottom: 1px solid var(--accent-border);
@@ -209,7 +280,29 @@ video {
 }
 
 .btn-secondary:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 2px;
+}
+
+.btn-nav {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--accent-text);
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: var(--r-full);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  white-space: nowrap;
+  transition: transform 0.15s ease;
+}
+
+.btn-nav:hover {
+  transform: translateY(-1px);
+}
+
+.btn-nav:focus-visible {
+  outline: 2px solid var(--text-h);
   outline-offset: 2px;
 }
 
@@ -223,31 +316,74 @@ header {
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
-  background-color: var(--bg);
+  /* Transparent by default so the navbar reads as part of the page
+     behind it instead of a separate bar. The .is-scrolled state below
+     paints a surface back in once the page moves under it. */
+  background-color: transparent;
+  /* Header has its own themed surface, independent of any page background image. */
   color: var(--text);
-  padding: 15px 24px;
-  border-bottom: 1px solid var(--border);
+  /* Side padding tracks the content column so the logo and the right-hand
+     actions line up with the hero card's edges. */
+  padding: 18px max(20px, calc((100% - var(--content-max)) / 2));
+  border-bottom: 1px solid transparent;
   position: sticky;
   top: 0;
   z-index: 10;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+/* Added by nav-toggle.js once the page is scrolled past the top, so the
+   header stays legible over whatever content passes beneath it. */
+header.is-scrolled {
+  background-color: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom-color: var(--border);
+}
+
+/* The mobile menu needs an opaque surface to drop onto. */
+header:has(nav.is-open) {
+  background-color: var(--bg);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* The wordmark is a <p>, not a heading — each page's real <h1> is its main
+   content heading. Its own size and line-height so Pacifico's descenders
+   aren't clipped. */
+.site-title {
+  margin: 0;
+  font-size: var(--fs-2xl);
+  letter-spacing: 0;
+  /* Pacifico's ascenders/descenders are tall relative to its em box —
+     this keeps the loop on the "p" clear of the header's bottom edge. */
+  line-height: 1.5;
 }
 
 .site-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  display: inline-block;
+  font-family: var(--script);
+  font-weight: 400;
   color: var(--text-h);
   text-decoration: none;
+  /* Pacifico sits high in its em box; nudge it back onto the nav's baseline. */
+  padding-top: 2px;
+  transition: color 0.15s ease;
 }
 
 .site-logo:hover {
-  text-decoration: underline;
+  /* An underline under a script face looks broken — shift color instead. */
+  color: var(--accent-ink);
+  text-decoration: none;
 }
 
-.site-logo img {
-  height: 44px;
-  width: auto;
-  display: block;
+.site-logo:focus-visible {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 4px;
+  border-radius: var(--r-xs);
 }
 
 .nav-toggle {
@@ -262,9 +398,9 @@ header {
 }
 
 .nav-toggle:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--accent-ink);
   outline-offset: 2px;
-  border-radius: 2px;
+  border-radius: var(--r-xs);
 }
 
 nav {
@@ -275,7 +411,9 @@ nav {
 nav ul {
   display: flex;
   align-items: center;
-  gap: 24px;
+  /* The gap is the ONLY horizontal spacing between links (see nav a below),
+     so the visual gutter between every pair of items is identical. */
+  gap: 32px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -288,8 +426,14 @@ nav li {
 nav a {
   color: var(--text);
   text-decoration: none;
-  padding: 8px 4px;
-  font-size: 15px;
+  /* No horizontal padding: it would add to the flex gap unevenly at the
+     ends of the row and make the spacing read as lopsided. */
+  padding: 8px 0;
+  font-size: var(--fs-sm);
+  /* Every link carries the same weight so the active one doesn't render
+     wider than its neighbours and throw the spacing off — the active state
+     is signalled by color alone (see below). */
+  font-weight: 500;
   white-space: nowrap;
   transition: color 0.15s ease;
 }
@@ -300,40 +444,25 @@ nav a:hover {
 }
 
 nav a:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--accent-ink);
   outline-offset: 2px;
-  border-radius: 2px;
+  border-radius: var(--r-xs);
 }
 
 nav a[aria-current="page"] {
-  color: var(--accent);
-  font-weight: 500;
+  color: var(--accent-ink);
 }
 
-.theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  background: var(--bg);
-  color: var(--text);
-  font-size: 16px;
-  cursor: pointer;
-  transition:
-    background 0.15s ease,
-    color 0.15s ease;
-}
+/* Tablet range: tighten the header up so it still fits on one row before
+   the hamburger takes over. The gap stays uniform, just smaller. */
+@media (max-width: 1024px) {
+  header {
+    gap: 12px;
+  }
 
-.theme-toggle:hover {
-  color: var(--text-h);
-}
-
-.theme-toggle:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  nav ul {
+    gap: 24px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -342,12 +471,8 @@ nav a[aria-current="page"] {
     order: 1;
   }
 
-  h1 {
+  .site-title {
     order: 0;
-  }
-
-  .theme-toggle {
-    order: 2;
   }
 
   nav {
@@ -370,56 +495,173 @@ nav a[aria-current="page"] {
 
   nav a {
     padding: 12px 4px;
-    font-size: 16px;
+    font-size: var(--fs-md);
   }
 }
 
 /* ============================
-   HERO
+   HERO (split layout)
    ============================ */
 
-hero {
-  display: block;
-  position: relative;
-}
-
-hero video {
-  width: 100%;
-  max-height: 480px;
-  object-fit: cover;
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
+.hero-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
-  text-align: center;
-  padding: 0 20px;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.2),
-    rgba(0, 0, 0, 0.55)
-  );
+  gap: 40px;
 }
 
-.hero-overlay h2 {
-  color: #fff;
-  font-size: 40px;
-  max-width: 700px;
-  margin: 0;
-  @media (max-width: 1024px) {
-    font-size: 28px;
+/* The hero's own padding/spacing; its cream panel shape comes from the
+   shared .hero-card/.band-cream rule in CARD SECTIONS above. */
+.hero-card {
+  padding: 64px 56px;
+  margin-top: 4px;
+}
+
+@media (max-width: 1024px) {
+  .hero-card {
+    padding: 48px 32px;
   }
 }
 
-.hero-overlay p {
-  color: #f3f4f6;
-  font-size: 18px;
-  max-width: 480px;
+@media (max-width: 768px) {
+  .hero-card {
+    padding: 40px 24px;
+  }
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  color: var(--text-h);
+  background: #fff;
+  border-radius: var(--r-full);
+  padding: 6px 16px;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.hero-copy h1 {
+  color: var(--text-h);
+  font-size: var(--fs-3xl);
+  line-height: 110%;
+  letter-spacing: -1px;
+  margin: 0 0 16px;
+}
+
+.hero-copy p {
+  color: var(--text);
+  font-size: var(--fs-md);
+  max-width: 520px;
+  margin-bottom: 24px;
+}
+
+.hero-stat {
+  color: var(--text);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  margin: 16px 0 0;
+}
+
+.hero-media img {
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow);
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .hero-split {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-copy h1 {
+    font-size: var(--fs-2xl);
+  }
+}
+
+/* ============================
+   HOW IT WORKS
+   ============================ */
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 900px;
+  margin: 32px auto 0;
+  text-align: center;
+}
+
+.step-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #fff;
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.step h3 {
+  color: var(--text-h);
+  margin-bottom: 6px;
+}
+
+.step p {
+  color: var(--text);
+  font-size: var(--fs-sm);
+}
+
+@media (max-width: 640px) {
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================
+   WHY CHOOSE US
+   ============================ */
+
+#why-us {
+  text-align: center;
+}
+
+#why-us-heading {
+  color: var(--text-h);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  text-align: left;
+  margin-top: 24px;
+}
+
+.feature {
+  background: #fff;
+  border-radius: var(--r-md);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.feature-icon {
+  font-size: 28px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.feature h3 {
+  margin-bottom: 6px;
+}
+
+.feature p {
+  color: var(--text);
+  font-size: var(--fs-sm);
+  line-height: 145%;
 }
 
 /* ============================
@@ -429,26 +671,33 @@ hero video {
 #home {
   max-width: 640px;
   margin: 0 auto;
-  padding-top: 48px;
   text-align: center;
+}
+
+#home h2 {
+  color: var(--text-h);
 }
 
 #home p {
   margin-top: 12px;
+  color: var(--text);
 }
 
 #home img {
   max-width: 500px;
   width: 100%;
   margin: 16px auto 0;
-  border-radius: 8px;
+  border-radius: var(--r-sm);
 }
 
 #about img {
   max-width: 720px;
   width: 100%;
+  /* Reserves the box before the file loads so the text below doesn't jump. */
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
   margin: 16px auto 0;
-  border-radius: 8px;
+  border-radius: var(--r-sm);
 }
 
 /* ============================
@@ -469,9 +718,10 @@ hero video {
 
 .service-card {
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--r-sm);
   padding: 20px;
   background: var(--bg);
+  /* Card has its own themed surface, independent of the page background image. */
   transition:
     box-shadow 0.15s ease,
     border-color 0.15s ease;
@@ -482,9 +732,15 @@ hero video {
   border-color: var(--accent-border);
 }
 
+.service-icon {
+  font-size: 28px;
+  display: block;
+  margin-bottom: 12px;
+}
+
 .service-card p {
   color: var(--text);
-  font-size: 15px;
+  font-size: var(--fs-sm);
   line-height: 145%;
 }
 
@@ -503,11 +759,16 @@ hero video {
   margin-top: 24px;
 }
 
+/* Taller than it was (200px) so portrait photos lose less to the crop.
+   --focus is each photo's focal point: cover() centres by default, which on
+   a portrait shot lands on the dog's chest and cuts the head off. Set
+   style="--focus: 25%" on an <img> to pull the crop toward the top. */
 .gallery-strip img {
   width: 100%;
-  height: 200px;
+  height: 240px;
   object-fit: cover;
-  border-radius: 8px;
+  object-position: center var(--focus, 50%);
+  border-radius: var(--r-sm);
 }
 
 @media (max-width: 640px) {
@@ -522,30 +783,45 @@ hero video {
 
 #trust {
   text-align: center;
-  padding: 32px 20px;
-  background: var(--accent-bg);
-  border-radius: 12px;
 }
 
-#trust blockquote {
-  margin: 0;
-  max-width: 600px;
-  margin-inline: auto;
-}
-
-#trust p {
-  font-size: 19px;
-  font-style: italic;
+#trust-heading {
   color: var(--text-h);
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: 24px auto 0;
+  text-align: left;
+}
+
+.testimonial-card {
+  background: #fff;
+  border-radius: var(--r-md);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.stars {
+  color: var(--accent-ink);
+  letter-spacing: 2px;
+  margin: 0 0 12px;
+}
+
+.testimonial-quote {
+  font-style: italic;
   line-height: 145%;
 }
 
-#trust cite {
+.testimonial-card cite {
   display: block;
   margin-top: 12px;
-  font-size: 14px;
+  font-size: var(--fs-sm);
   font-style: normal;
-  color: var(--text);
+  font-weight: 500;
 }
 /* ============================
    CONTACT FORM PAGE
@@ -568,7 +844,7 @@ hero video {
   width: 100%;
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: 24px;
+  border-radius: var(--r-lg);
   box-shadow: var(--shadow);
   overflow: hidden;
 }
@@ -585,7 +861,7 @@ hero video {
 
 .contact-illustration p {
   color: var(--text);
-  font-size: 15px;
+  font-size: var(--fs-sm);
   max-width: 220px;
 }
 
@@ -606,8 +882,8 @@ hero video {
   align-items: center;
   gap: 12px;
   background: var(--code-bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  border: 1px solid var(--field-border);
+  border-radius: var(--r-md);
   padding: 14px 18px;
   transition: border-color 0.15s ease;
 }
@@ -649,11 +925,11 @@ hero video {
   justify-content: center;
   gap: 8px;
   background: var(--accent);
-  color: #fff;
+  color: var(--accent-text);
   border: none;
-  border-radius: 12px;
+  border-radius: var(--r-md);
   padding: 16px;
-  font-size: 16px;
+  font-size: var(--fs-md);
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
@@ -691,6 +967,24 @@ hero video {
   }
 }
 
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: var(--accent-bg);
+  border-radius: var(--r-md);
+  padding: 32px;
+}
+
+.contact-detail h3 {
+  color: var(--text-h);
+}
+
+.contact-detail p,
+.contact-detail a {
+  color: var(--text);
+}
+
 /* ============================
    FOOTER
    ============================ */
@@ -698,9 +992,25 @@ hero video {
 footer {
   text-align: center;
   background-color: var(--bg);
+  /* Footer has its own themed surface, independent of any page background image. */
   color: var(--text);
   padding: 15px;
   border-top: 1px solid var(--border);
+}
+
+.footer-nap {
+  margin: 0 0 12px;
+  font-size: var(--fs-sm);
+  line-height: 165%;
+}
+
+.footer-nap a {
+  color: inherit;
+}
+
+.footer-nap .footer-name {
+  font-weight: 600;
+  color: var(--text-h);
 }
 
 .social-links {
@@ -726,7 +1036,7 @@ footer {
 }
 
 .social-links a:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--accent-ink);
   outline-offset: 2px;
 }
 
@@ -735,22 +1045,37 @@ footer {
   height: 18px;
 }
 
-/* Swap to the dark-optimized icon set once the manual theme toggle
-   sets data-theme="dark" (defaults to the light/Original set otherwise). */
-.social-icon-dark {
-  display: none;
-}
-
-:root[data-theme="dark"] .social-icon-light {
-  display: none;
-}
-
-:root[data-theme="dark"] .social-icon-dark {
-  display: inline-block;
-}
-
 @media (max-width: 768px) {
   main {
     padding: 0 20px;
   }
+}
+
+/* Respect a reduced-motion preference: keep state changes, drop the
+   movement and the follow-us widget's photo cross-fade. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .btn-primary:hover,
+  .btn-nav:hover,
+  .btn-submit:hover {
+    transform: none;
+  }
+}
+
+/* Centred closing CTA inside a .band-cream card (gallery, and anywhere else
+   a page needs to end by pointing at booking). */
+.section-cta {
+  text-align: center;
+}
+
+.section-cta p {
+  margin-bottom: 20px;
 }

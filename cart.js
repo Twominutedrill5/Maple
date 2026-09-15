@@ -138,18 +138,94 @@
     });
   }
 
+  // --- Drawer open/close, focus management and focus trap -------------
+  //
+  // The drawer is a modal overlay, so while it is open: focus moves into
+  // it, Tab cycles within it, Escape closes it, the page behind it does
+  // not scroll, and on close focus returns to whatever opened it. While it
+  // is closed it is `inert`, so its controls are not tab stops.
+
+  const FOCUSABLE =
+    'a[href], button:not([disabled]), input:not([disabled]), ' +
+    'select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+  let lastFocused = null;
+
+  function drawerIsOpen() {
+    return !!document.getElementById("cart-drawer")?.classList.contains("open");
+  }
+
+  function focusableInDrawer() {
+    const drawer = document.getElementById("cart-drawer");
+    if (!drawer) return [];
+    return [...drawer.querySelectorAll(FOCUSABLE)].filter(
+      (el) => el.offsetParent !== null || el === document.activeElement
+    );
+  }
+
   function openCart() {
-    document.getElementById("cart-drawer")?.classList.add("open");
+    const drawer = document.getElementById("cart-drawer");
+    if (!drawer) return;
+
+    lastFocused = document.activeElement;
+
+    drawer.classList.add("open");
     document.getElementById("cart-overlay")?.classList.add("open");
-    document.getElementById("cart-drawer")?.setAttribute("aria-hidden", "false");
+    drawer.setAttribute("aria-hidden", "false");
+    drawer.removeAttribute("inert");
     document.getElementById("cart-toggle")?.setAttribute("aria-expanded", "true");
+    document.body.classList.add("has-overlay");
+
+    // Land on the close button rather than leaving focus behind the overlay.
+    document.getElementById("cart-close")?.focus();
   }
 
   function closeCart() {
-    document.getElementById("cart-drawer")?.classList.remove("open");
+    const drawer = document.getElementById("cart-drawer");
+    if (!drawer) return;
+
+    drawer.classList.remove("open");
     document.getElementById("cart-overlay")?.classList.remove("open");
-    document.getElementById("cart-drawer")?.setAttribute("aria-hidden", "true");
+    drawer.setAttribute("aria-hidden", "true");
+    drawer.setAttribute("inert", "");
     document.getElementById("cart-toggle")?.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("has-overlay");
+
+    // Return focus to whatever opened the drawer.
+    if (lastFocused && document.contains(lastFocused)) lastFocused.focus();
+    lastFocused = null;
+  }
+
+  function handleDrawerKeydown(event) {
+    if (!drawerIsOpen()) return;
+
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeCart();
+      return;
+    }
+
+    if (event.key !== "Tab") return;
+
+    const items = focusableInDrawer();
+    if (!items.length) return;
+
+    const first = items[0];
+    const last = items[items.length - 1];
+    const drawer = document.getElementById("cart-drawer");
+
+    // Keep Tab inside the drawer, including when focus has somehow
+    // escaped to the page behind it.
+    if (!drawer.contains(document.activeElement)) {
+      event.preventDefault();
+      first.focus();
+    } else if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   }
 
   function handleCheckout() {
@@ -180,6 +256,11 @@
         .querySelector('.qty-stepper [data-action="dec"]')
         ?.addEventListener("click", () => changeQty(id, -1));
     });
+
+    // Closed on load: keep its controls out of the tab order.
+    document.getElementById("cart-drawer")?.setAttribute("inert", "");
+
+    document.addEventListener("keydown", handleDrawerKeydown);
 
     document.getElementById("cart-toggle")?.addEventListener("click", openCart);
     document.getElementById("cart-close")?.addEventListener("click", closeCart);

@@ -8,7 +8,8 @@
 
 #gallery > p {
   color: var(--text);
-  margin-bottom: 24px;
+  margin-top: 8px;
+  margin-bottom: 32px;
 }
 
 .gallery-mosaic {
@@ -20,7 +21,7 @@
   width: 100%;
   display: block;
   margin-bottom: 16px;
-  border-radius: 10px;
+  border-radius: var(--r-sm);
   break-inside: avoid; /* keeps a photo from splitting across columns */
   border: 1px solid var(--border);
   transition:
@@ -43,15 +44,4 @@
   .gallery-mosaic {
     column-count: 1;
   }
-}
-
-/* Clickable site logo in the header — see cart.css for the same rule
-   (duplicated per-page since style.css is shared and not editable here). */
-.site-logo {
-  color: var(--text-h);
-  text-decoration: none;
-}
-
-.site-logo:hover {
-  text-decoration: underline;
 }

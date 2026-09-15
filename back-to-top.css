@@ -11,7 +11,7 @@
   border: none;
   border-radius: 50%;
   background: var(--accent);
-  color: #fff;
+  color: var(--accent-text);
   font-size: 18px;
   line-height: 1;
   cursor: pointer;

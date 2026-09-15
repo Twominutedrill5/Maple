@@ -5,29 +5,32 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gallery | Maple's Dog Grooming</title>
+    <meta
+      name="description"
+      content="Recent grooms from Maple's Dog Grooming — before-and-after photos of bathing, full grooms, and breed-standard cuts."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="/gallery.css" />
     <link rel="stylesheet" href="/cart.css" />
     <link rel="stylesheet" href="/back-to-top.css" />
-    <style>
-      /* Background image for the gallery page only. */
-      body {
-        background-image: url("/assets/pinkish-background.avif");
-        background-repeat: no-repeat;
-        background-position: top center;
-        background-size: cover;
-        background-attachment: fixed;
-      }
-    </style>
+    <link rel="stylesheet" href="/follow-us.css" />
   </head>
   <body>
     <header>
-      <h1>
-        <a href="/index.html" class="site-logo">
-          <img src="/assets/maple's-logo.png" alt="Maple's Dog Grooming logo" />
-          Maple's Dog Grooming
-        </a>
-      </h1>
+      <p class="site-title">
+        <a
+          href="/index.html"
+          class="site-logo"
+          aria-label="Maple's Dog Grooming — home"
+          >Maple's</a
+        >
+      </p>
 
       <button
         class="nav-toggle"
@@ -44,11 +47,13 @@
           <li><a href="/services.html">Services</a></li>
           <li><a href="/gallery.html" aria-current="page">Gallery</a></li>
           <li><a href="/about.html">About</a></li>
-          <li><a href="/contact.html">Book Now</a></li>
+          <li><a href="/contact.html">Contact</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
+        <a href="/contact.html" class="btn-nav">Book Now</a>
+
         <button
           class="cart-toggle"
           id="cart-toggle"
@@ -58,47 +63,54 @@
         >
           🛒 <span class="cart-count" id="cart-count">0</span>
         </button>
-
-        <button
-          class="theme-toggle"
-          id="theme-toggle"
-          aria-label="Toggle dark mode"
-        >
-          🌙
-        </button>
       </div>
     </header>
     <main>
-      <section id="gallery">
-        <h2>Gallery</h2>
-        <p>Check out our happy clients!</p>
+      <section class="page-header band-cream">
+        <h1 id="gallery-heading">Gallery</h1>
+        <p>
+          A look at some of our recent grooms — every coat type, every
+          temperament, individual care.
+        </p>
+      </section>
 
+      <section id="gallery" aria-labelledby="gallery-heading">
         <!-- MOSAIC GALLERY
              Uses CSS multi-column layout (not CSS Grid) so photos of
              different heights stack naturally like a real mosaic,
              instead of being forced into equal-height grid cells. -->
         <div class="gallery-mosaic">
-          <img src="/assets/bernie-haircut.jpg" alt="Bernie after grooming" />
+          <img src="/assets/poodle_trim.jpg" alt="Standard poodle mid-trim on the grooming table" />
           <img
-            src="/assets/cocker-spaniel-haircut.jpg"
-            alt="Cocker Spaniel after a haircut"
+            loading="lazy"
+            src="/assets/puppy_trim.jpg"
+            alt="Cocker spaniel having its ears clipped"
           />
-          <img src="/assets/dog-1.jpg" alt="Dog after grooming" />
+          <img src="/assets/dog-1.jpg" alt="Border collie waiting in the bath" />
           <img
-            src="/assets/dog-grooming-trio.jpg"
-            alt="Three dogs together after grooming"
+            src="/assets/two_pups.jpg"
+            alt="Two poodle puppies in a bubble bath"
           />
-          <img src="/assets/dog-haircut.jpg" alt="Dog with a fresh haircut" />
-          <img src="/assets/dog-haircut-2.jpg" alt="Dog with a fresh haircut" />
-          <img src="/assets/dog-haircut-3.jpg" alt="Dog with a fresh haircut" />
+          <img src="/assets/pit_bath.jpg" alt="Bulldog enjoying a bubble bath" />
+          <img src="/assets/husky_brush_deshedding.jpg" alt="Husky being de-shed with a grooming rake" />
+          <img src="/assets/dog_brush.avif" alt="Terrier being blow-dried after a wash" />
           <img
-            src="/assets/golden-groom.jpg"
-            alt="Golden Retriever after grooming"
+            loading="lazy"
+            src="/assets/lab_brushed.avif"
+            alt="Groomer brushing out a large cream-coated dog"
           />
           <img
-            src="/assets/happy-dog.jpg"
-            alt="Happy client after their grooming appointment"
+            src="/assets/pup_comb.jpg"
+            alt="Yorkshire terrier being combed out"
           />
+        </div>
+      </section>
+
+      <section class="band-cream" aria-labelledby="gallery-cta-heading">
+        <div class="section-cta">
+          <h2 id="gallery-cta-heading">Want Your Dog in Here?</h2>
+          <p>Book a groom and we'll add them to the wall.</p>
+          <a href="/contact.html" class="btn-primary">Book an Appointment</a>
         </div>
       </section>
     </main>
@@ -138,6 +150,15 @@
     </aside>
 
     <footer>
+      <!-- NAP (name / address / phone) repeated sitewide — local search wants
+           these identical on every page. PLACEHOLDER: swap in the real
+           address, phone and hours. -->
+      <p class="footer-nap">
+        <span class="footer-name">Maple's Dog Grooming</span><br />
+        123 Maple Street, Your Town, ST 00000<br />
+        <a href="tel:+15555555555">(555) 555-5555</a> &middot; Tue–Sat 9am–5pm
+      </p>
+
       <!-- Placeholder hrefs — swap in the real profile URLs. -->
       <div class="social-links" id="social">
         <a
@@ -149,12 +170,8 @@
           <img
             src="/socials/Platform=Facebook,%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=Facebook,%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
         <a
@@ -166,12 +183,8 @@
           <img
             src="/socials/Platform=Instagram,%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=Instagram,%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
         <a
@@ -183,12 +196,8 @@
           <img
             src="/socials/Platform=TikTok,%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=TikTok,%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
         <a
@@ -200,12 +209,8 @@
           <img
             src="/socials/Platform=Snapchat,%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=Snapchat,%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
         <a
@@ -217,12 +222,8 @@
           <img
             src="/socials/Platform=X%20(Twitter),%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=X%20(Twitter),%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
         <a
@@ -234,24 +235,40 @@
           <img
             src="/socials/Platform=LinkedIn,%20Color=Original.png"
             alt=""
-            class="social-icon social-icon-light"
-          />
-          <img
-            src="/socials/Platform=LinkedIn,%20Color=Negative.png"
-            alt=""
-            class="social-icon social-icon-dark"
+            class="social-icon"
+            loading="lazy"
           />
         </a>
       </div>
-      <p>&copy; 2024 Maple's Dog Grooming. All rights reserved.</p>
+      <p>&copy; 2026 Maple's Dog Grooming. All rights reserved.</p>
     </footer>
+    <!-- href/target/rel are set by follow-us.js once FOLLOW_URL is
+         configured, so this ships as a panel rather than a dead link. -->
+    <a
+      class="follow-us-widget"
+      id="follow-us-widget"
+      aria-label="Follow us on Instagram"
+    >
+      <h3 class="follow-us-heading">Follow Us</h3>
+      <div class="follow-us-photo">
+        <img
+          id="follow-us-photo-img"
+          src="/assets/pup_comb.jpg"
+          alt="Yorkshire terrier being combed out"
+        />
+      </div>
+      <div class="follow-us-icons" aria-hidden="true">
+        <img src="/socials/Platform=Instagram,%20Color=Original.png" alt="" />
+        <img src="/socials/Platform=Facebook,%20Color=Original.png" alt="" />
+      </div>
+    </a>
     <button id="back-to-top" class="back-to-top" aria-label="Back to top">
       ↑
     </button>
 
-    <script src="/theme-toggle.js" defer></script>
     <script src="/nav-toggle.js" defer></script>
     <script src="/cart.js" defer></script>
     <script src="/back-to-top.js" defer></script>
+    <script src="/follow-us.js" defer></script>
   </body>
 </html>

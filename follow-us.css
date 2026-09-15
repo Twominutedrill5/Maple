@@ -1,0 +1,85 @@
+/* ============================
+   Follow Us widget
+   ============================ */
+
+.follow-us-widget {
+  position: fixed;
+  text-decoration: none;
+  color: inherit;
+  left: 24px;
+  bottom: 24px;
+  width: 180px;
+  background: #fff;
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  z-index: 30;
+}
+
+/* Without a destination the widget renders as a plain panel, so drop the
+   pointer cursor and the lift-on-hover that imply it is clickable. */
+.follow-us-widget:not([href]) {
+  cursor: default;
+}
+
+.follow-us-widget:not([href]):hover {
+  transform: none;
+}
+
+.follow-us-widget:hover {
+  transform: translateY(-2px);
+}
+
+.follow-us-widget:focus-visible {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 2px;
+}
+
+.follow-us-heading {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #08060d;
+  margin: 0 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #08060d;
+}
+
+.follow-us-photo {
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  aspect-ratio: 1;
+  margin-bottom: 12px;
+  background: var(--code-bg);
+}
+
+.follow-us-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Square crop; follow-us.js sets --focus per photo as it rotates. */
+  object-position: center var(--focus, 50%);
+  transition: opacity 0.3s ease;
+}
+
+.follow-us-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.follow-us-icons img {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .follow-us-widget {
+    display: none;
+  }
+}

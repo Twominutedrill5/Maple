@@ -1,12 +1,17 @@
 // booking.js — Maple's Dog Grooming
-// Front-end-only date/time picker + confirmation flow.
-// There is no backend yet: nothing here actually sends or reserves
-// anything. Selecting a slot just tracks it in memory, and "Confirm
-// Appointment" shows an on-page thank-you and clears the cart.
-// Swap this out once a real booking backend/calendar exists.
+// Date/time picker + confirmation flow. Submission is gated on
+// BOOKING_ENDPOINT below: while it is empty the form shows a demo notice
+// instead of a confirmation, because nothing is actually sent or reserved.
 
 (function () {
   const CART_STORAGE_KEY = "maples-grooming-cart";
+
+  // Where booking requests are sent. Empty means no backend is wired up yet:
+  // the form still validates and picks a slot, but it shows a clearly-labelled
+  // demo notice instead of a confirmation, so nobody is told they have an
+  // appointment that nobody received. Set this (Formspree/Web3Forms/Netlify
+  // endpoint, or your own) and the real confirmation returns.
+  const BOOKING_ENDPOINT = "";
 
   // Business hours used to generate slots. Sunday (0) and Monday (1) are
   // closed, matching the hours block at the bottom of this page.
@@ -116,7 +121,6 @@
       return;
     }
 
-    // Front-end only: nothing is actually sent anywhere yet.
     const form = document.getElementById("booking-form");
     const successEl = document.getElementById("booking-success");
     const successName = document.getElementById("booking-success-name");
@@ -128,6 +132,16 @@
       { weekday: "long", month: "long", day: "numeric" }
     );
 
+    // No endpoint yet — say so plainly rather than faking a confirmation,
+    // and leave the form and cart intact so nothing is lost.
+    if (!BOOKING_ENDPOINT) {
+      showError(
+        "Demo only — online booking isn't connected yet, so this request " +
+          "hasn't been sent. Please call to book."
+      );
+      return;
+    }
+
     if (successName) successName.textContent = nameInput?.value || "there";
     if (successDatetime)
       successDatetime.textContent = `${prettyDate} at ${selectedTime}`;
@@ -135,7 +149,7 @@
     if (form) form.hidden = true;
     if (successEl) successEl.hidden = false;
 
-    // Clear the cart now that the "appointment" is confirmed.
+    // Clear the cart now that the appointment request has been sent.
     try {
       localStorage.removeItem(CART_STORAGE_KEY);
     } catch (err) {
