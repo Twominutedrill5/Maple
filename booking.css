@@ -8,21 +8,98 @@
   display: block;
 }
 
+/* Two columns on desktop: the form carries the page, the aside holds the
+   practical details people check while filling it in. Previously this was a
+   single 640px column, which left most of the width empty. */
 .booking-page-wrap {
-  max-width: 640px;
+  max-width: var(--content-max);
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
+  align-items: start;
   gap: 32px;
 }
 
-.booking-card {
+.booking-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* Follows you down the long form; 24px clears the sticky header. */
+  position: sticky;
+  top: 104px;
+}
+
+.contact-phone a {
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  color: var(--accent-ink);
+  text-decoration: none;
+}
+
+.contact-phone a:hover {
+  text-decoration: underline;
+}
+
+.contact-note {
+  font-size: var(--fs-sm);
+}
+
+.visit-checklist {
+  margin: 0;
+  padding-left: 20px;
+  font-size: var(--fs-sm);
+  line-height: 160%;
+}
+
+.visit-checklist li {
+  margin-bottom: 8px;
+}
+
+.visit-checklist li:last-child {
+  margin-bottom: 0;
+}
+
+/* With the form card now cream, the aside flips to white so the two read as
+   distinct surfaces — --accent-bg is only 1.07:1 against the cream, so the
+   panels would otherwise have merged. */
+.booking-aside .contact-details {
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  box-shadow: var(--shadow);
+}
+
+.booking-aside h2 {
+  font-size: var(--fs-md);
+  margin-bottom: 8px;
+}
+
+/* One column before the aside gets too narrow to read. */
+@media (max-width: 900px) {
+  .booking-page-wrap {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+  }
+
+  .booking-aside {
+    position: static;
+  }
+}
+
+/* Cream panel rather than white-on-white, matching the card language used
+   on the rest of the site. No border or shadow needed — the fill itself is
+   what separates it from the page. */
+.booking-card {
+  background: var(--page-cream);
+  border: none;
+  border-radius: var(--r-xl);
   padding: 40px;
   text-align: left;
+}
+
+/* Everything filled INSIDE the card flips to white so it still reads against
+   the cream instead of dissolving into it: --code-bg is 1.1:1 on cream and
+   --accent-bg only 1.07:1. */
+.booking-card .input-group {
+  background: var(--bg);
 }
 
 .booking-card h2 {
@@ -145,7 +222,8 @@
 .booking-success {
   text-align: center;
   padding: 32px 20px;
-  background: var(--accent-bg);
+  background: var(--bg);
+  border: 1px solid var(--border);
   border-radius: var(--r-md);
 }
 

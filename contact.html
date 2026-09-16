@@ -16,6 +16,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/bubbles.css" />
     <link rel="stylesheet" href="/contact-form.css" />
     <link rel="stylesheet" href="/cart.css" />
     <link rel="stylesheet" href="/booking.css" />
@@ -197,21 +198,64 @@
           </div>
         </div>
 
-        <div class="contact-details">
-          <div class="contact-detail">
-            <h3>Hours</h3>
-            <p>Tue–Sat: 9am–5pm</p>
-            <p>Closed Sun &amp; Mon</p>
+        <aside class="booking-aside" aria-label="Visit details">
+          <div class="contact-details">
+            <div class="contact-detail">
+              <h2>Hours</h2>
+              <p>Tue–Sat: 9am–5pm</p>
+              <p>Closed Sun &amp; Mon</p>
+            </div>
+
+            <div class="contact-detail">
+              <h2>Prefer to call?</h2>
+              <p class="contact-phone">
+                <a href="tel:+15555555555">(555) 555-5555</a>
+              </p>
+              <p class="contact-note">
+                Happy to book over the phone during opening hours.
+              </p>
+            </div>
+
+            <div class="contact-detail">
+              <h2>Find us</h2>
+              <p>123 Maple Street, Your Town, ST 00000</p>
+              <!-- PLACEHOLDER: point this at the client's real listing.
+                   A Google Maps embed needs a per-client API key and adds a
+                   third-party request, so the template ships a plain link. -->
+              <p>
+                <a
+                  class="btn-secondary"
+                  href="https://maps.google.com/?q=123+Maple+Street"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Get directions</a
+                >
+              </p>
+            </div>
           </div>
-          <div class="contact-detail">
-            <h3>Phone</h3>
-            <p><a href="tel:+15555555555">(555) 555-5555</a></p>
+
+          <div class="contact-details">
+            <div class="contact-detail">
+              <h2>Before your visit</h2>
+              <!-- PLACEHOLDER COPY — swap for the client's actual guidance. -->
+              <ul class="visit-checklist">
+                <li>Arrive 5–10 minutes early so your dog can settle in.</li>
+                <li>Bring proof of up-to-date vaccinations.</li>
+                <li>Tell us about any anxiety, sore spots, or sensitivities.</li>
+                <li>Let us know in advance if the coat is heavily matted.</li>
+              </ul>
+            </div>
+
+            <div class="contact-detail">
+              <h2>Cancellations</h2>
+              <!-- PLACEHOLDER COPY — confirm the client's real policy. -->
+              <p class="contact-note">
+                Please give us at least 24 hours' notice if you need to change
+                or cancel an appointment.
+              </p>
+            </div>
           </div>
-          <div class="contact-detail">
-            <h3>Address</h3>
-            <p>123 Maple Street, Your Town, ST 00000</p>
-          </div>
-        </div>
+        </aside>
       </div>
     </main>
     <footer>
@@ -333,6 +377,7 @@
     </button>
 
     <script src="/nav-toggle.js" defer></script>
+    <script src="/bubbles.js" defer></script>
     <script src="/cart.js" defer></script>
     <script src="/back-to-top.js" defer></script>
     <script src="/follow-us.js" defer></script>

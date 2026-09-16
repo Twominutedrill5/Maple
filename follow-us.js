@@ -9,14 +9,17 @@
 (function () {
   // `focus` is the vertical focal point for the square crop — the default
   // centre lands on the dog's body in portrait shots and cuts the head off.
+  // focus   = vertical focal point (lower % pulls the crop toward the head)
+  // focusX  = horizontal focal point, for landscape shots where the dog
+  //           stands off to one side and a centred square crop misses it.
   const GALLERY_IMAGES = [
     { src: "/assets/two_pups.jpg", focus: "50%" },
     { src: "/assets/poodle_trim.jpg", focus: "30%" },
-    { src: "/assets/pup_comb.jpg", focus: "50%" },
+    { src: "/assets/pup_comb.jpg", focus: "50%", focusX: "60%" },
     { src: "/assets/pit_bath.jpg", focus: "50%" },
-    { src: "/assets/puppy_trim.jpg", focus: "40%" },
-    { src: "/assets/husky_brush_deshedding.jpg", focus: "40%" },
-    { src: "/assets/lab_brushed.avif", focus: "50%" },
+    { src: "/assets/puppy_trim.jpg", focus: "40%", focusX: "65%" },
+    { src: "/assets/husky_brush_deshedding.jpg", focus: "40%", focusX: "100%" },
+    { src: "/assets/lab_brushed.avif", focus: "50%", focusX: "75%" },
     { src: "/assets/dog_brush.avif", focus: "50%" },
     { src: "/assets/husky_groom.jpg", focus: "25%" },
     { src: "/assets/lab_shep_mix.jpg", focus: "25%" },
@@ -49,7 +52,8 @@
       setTimeout(() => {
         const next = GALLERY_IMAGES[index];
         img.src = next.src;
-        img.style.setProperty("--focus", next.focus);
+        img.style.setProperty("--focus", next.focus || "50%");
+        img.style.setProperty("--focus-x", next.focusX || "50%");
         img.style.opacity = "1";
       }, 300);
     }, ROTATE_MS);

@@ -146,6 +146,41 @@ main > section {
   }
 }
 
+/* Home page sections sit closer together than inner pages. */
+body.home main > section {
+  padding-top: 36px;
+  padding-bottom: 36px;
+}
+
+body.home .band-cream {
+  padding-top: 36px;
+  padding-bottom: 36px;
+  margin-block: 12px;
+}
+
+@media (max-width: 1024px) {
+  body.home .band-cream {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  body.home .band-cream {
+    padding-top: 28px;
+    padding-bottom: 28px;
+  }
+}
+
+/* Tighten just the gap between "How It Works" and "Why Us". */
+body.home #how-it-works {
+  padding-bottom: 12px;
+}
+
+body.home #why-us {
+  padding-top: 12px;
+}
+
 /* Page-header card: the cream panel that opens an inner page, giving the
    transparent navbar a surface to sit against the way the hero does on the
    home page. Pair with .band-cream for the panel itself. */
@@ -760,14 +795,16 @@ nav a[aria-current="page"] {
 }
 
 /* Taller than it was (200px) so portrait photos lose less to the crop.
-   --focus is each photo's focal point: cover() centres by default, which on
-   a portrait shot lands on the dog's chest and cuts the head off. Set
-   style="--focus: 25%" on an <img> to pull the crop toward the top. */
+   --focus / --focus-x are each photo's focal point: cover() centres by
+   default, which on a portrait shot lands on the dog's chest and cuts the
+   head off, and on a landscape shot can miss a dog standing off to one
+   side. Set style="--focus: 25%" to pull the crop up, and
+   style="--focus-x: 80%" to pull it right. */
 .gallery-strip img {
   width: 100%;
   height: 240px;
   object-fit: cover;
-  object-position: center var(--focus, 50%);
+  object-position: var(--focus-x, 50%) var(--focus, 50%);
   border-radius: var(--r-sm);
 }
 

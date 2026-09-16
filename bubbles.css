@@ -1,0 +1,86 @@
+/* ============================
+   Soap bubbles
+   ============================
+
+   A decorative layer of cream bubbles drifting up behind the page.
+   Built to stay out of the way:
+     - position: fixed + pointer-events: none, so it never intercepts a
+       click or affects layout
+     - aria-hidden in the markup, so screen readers skip it entirely
+     - only transform/opacity animate, so it stays on the compositor
+       instead of forcing layout on every frame
+     - hidden outright under prefers-reduced-motion
+*/
+
+.bubbles {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bubble {
+  position: absolute;
+  bottom: -160px;
+  border-radius: 50%;
+  /* Cream fill with a soft highlight, plus a faint peach rim — on a white
+     page the flat cream alone (1.2:1) reads as a smudge rather than a
+     bubble; the rim is what gives it an edge. */
+  background:
+    radial-gradient(
+      circle at 32% 28%,
+      rgba(255, 255, 255, 0.95) 0 8%,
+      var(--page-cream) 42% 100%
+    );
+  box-shadow:
+    inset 0 0 0 1px rgba(242, 167, 101, 0.28),
+    inset -4px -6px 10px rgba(242, 167, 101, 0.16);
+  opacity: 0;
+  animation-name: bubble-rise;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes bubble-rise {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.85);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    /* Rises past the top of the viewport, drifting sideways on the way. */
+    transform: translate3d(var(--drift, 30px), calc(-100vh - 240px), 0)
+      scale(1.06);
+    opacity: 0;
+  }
+}
+
+/* The layer sits at z-index 0, so page content is lifted above it. The
+   header (10) and the floating widgets (30) are already stacked higher. */
+main,
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* bubbles.js already declines to build the layer on phones or under a
+   reduced-motion preference; these are the belt-and-braces for anything
+   that slips through (a resize before the listener fires, JS disabled). */
+@media (max-width: 768px) {
+  .bubbles {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bubbles {
+    display: none;
+  }
+}

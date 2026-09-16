@@ -16,51 +16,99 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/bubbles.css" />
     <link rel="stylesheet" href="/cart.css" />
     <link rel="stylesheet" href="/back-to-top.css" />
     <link rel="stylesheet" href="/follow-us.css" />
     <style>
-      /* Keeps paragraphs from stretching edge-to-edge on wide screens —
-         long unconstrained line lengths are a big part of what reads as
-         "empty" space. Move into style.css once you're happy with it. */
+      /* Full content width now — the intro sits beside the photo and the
+         three sections run three-up inside a cream card, so the old 760px
+         prose cap is no longer what keeps line length sane. */
       #about {
-        max-width: 760px;
-        margin: 0 auto;
         padding: 32px 20px 0;
         text-align: left;
       }
 
-      /* The global h3 has no top margin (it's tuned for cards, where the
-         heading is first). In running prose that makes each subhead collide
-         with the paragraph above it. */
-      #about h3 {
-        margin-top: 36px;
+      /* Intro: copy beside the photo. */
+      .about-intro {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: center;
+        gap: 48px;
       }
 
-      #about .cta h3 {
-        margin-top: 0;
+      /* Caps the measure so the paragraph stays readable even though the
+         column itself is wide. */
+      .about-intro-copy p {
+        max-width: 560px;
       }
 
-      /* Matches the rounded cream cards used across the rest of the site.
-         Not .band-cream itself — that class also does the full-width column
-         math, and this sits inside the 760px prose column. */
+      .about-intro h1 {
+        margin-bottom: 16px;
+      }
+
+      .about-intro img {
+        width: 100%;
+        aspect-ratio: 3 / 2;
+        object-fit: cover;
+        object-position: var(--focus-x, 50%) var(--focus, 50%);
+        border-radius: var(--r-lg);
+      }
+
+      /* Cream card holding the three story sections. */
+      .about-card {
+        background: var(--page-cream);
+        border-radius: var(--r-xl);
+        padding: 56px 48px;
+        margin-top: 56px;
+      }
+
+      .about-pillars {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+        gap: 40px;
+      }
+
+      .about-pillars h2 {
+        font-size: var(--fs-lg);
+        margin-bottom: 10px;
+      }
+
+      .about-pillars p {
+        font-size: var(--fs-sm);
+        line-height: 160%;
+      }
+
+      /* Matches the rounded cream cards used across the rest of the site. */
       .cta {
         text-align: center;
-        margin: 48px 0 8px;
+        margin: 32px 0 8px;
         padding: 40px 32px;
-        border-radius: 32px;
+        border-radius: var(--r-xl);
         background: var(--page-cream);
       }
 
       .cta h3 {
         margin-bottom: 6px;
-        font-size: 22px;
+        font-size: var(--fs-lg);
         color: var(--text-h);
       }
 
       .cta p {
         margin-bottom: 20px;
         color: var(--text);
+      }
+
+      @media (max-width: 900px) {
+        .about-intro {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+
+        .about-card {
+          padding: 40px 24px;
+          margin-top: 40px;
+        }
       }
     </style>
   </head>
@@ -110,46 +158,64 @@
     </header>
     <main>
       <section id="about">
-        <h1>About Us</h1>
+        <div class="about-intro">
+          <div class="about-intro-copy">
+            <h1>About Us</h1>
 
-        <!-- PLACEHOLDER COPY — swap in the real story, names, and dates
-             once the client confirms details. -->
-        <p>
-          Maple's Dog Grooming started with a simple idea: every dog deserves to
-          feel calm, comfortable, and cared for during grooming — not rushed
-          through it. What began as grooming appointments for neighbors and
-          friends has grown into a full-service studio built on the same
-          philosophy: patient hands, low-stress handling, and genuine attention
-          to each dog's individual needs.
-        </p>
+            <!-- PLACEHOLDER COPY — swap in the real story, names, and dates
+                 once the client confirms details. -->
+            <p>
+              Maple's Dog Grooming started with a simple idea: every dog
+              deserves to feel calm, comfortable, and cared for during grooming
+              — not rushed through it. What began as grooming appointments for
+              neighbors and friends has grown into a full-service studio built
+              on the same philosophy: patient hands, low-stress handling, and
+              genuine attention to each dog's individual needs.
+            </p>
+          </div>
 
-        <img
-          loading="lazy"
-          src="/assets/poochie_scrub.jpg"
-          alt="Groomer washing a poodle in the salon's bathing station"
-        />
+          <div class="about-intro-media">
+            <img
+              loading="lazy"
+              src="/assets/poochie_scrub.jpg"
+              alt="Groomer washing a poodle in the salon's bathing station"
+            />
+          </div>
+        </div>
 
-        <h3>Our Approach</h3>
-        <p>
-          We believe grooming should be a positive experience, not a stressful
-          one. Every appointment is paced to the dog in the chair — whether
-          that's a confident regular or a nervous first-timer — using gentle
-          handling, frequent breaks, and plenty of reassurance along the way.
-        </p>
+        <div class="about-card">
+          <div class="about-pillars">
+            <div class="about-pillar">
+              <h2>Our Approach</h2>
+              <p>
+                We believe grooming should be a positive experience, not a
+                stressful one. Every appointment is paced to the dog in the
+                chair — whether that's a confident regular or a nervous
+                first-timer — using gentle handling, frequent breaks, and plenty
+                of reassurance along the way.
+              </p>
+            </div>
 
-        <h3>Meet the Groomers</h3>
-        <p>
-          Maple's, has been a local staple since 2022. Lead groomer Jane brings
-          experience, certifications, and a passion for helping dogs feel their
-          best. Jane has been grooming dogs for over 10 years and is certified
-          in breed-specific styling and canine first aid.
-        </p>
+            <div class="about-pillar">
+              <h2>Meet the Groomer</h2>
+              <p>
+                Maple's has been a local staple since 2022. Lead groomer Jane
+                brings experience, certifications, and a passion for helping
+                dogs feel their best. Jane has been grooming dogs for over 10
+                years and is certified in breed-specific styling and canine
+                first aid.
+              </p>
+            </div>
 
-        <h3>Our Mission</h3>
-        <p>
-          To give every dog a safe, comfortable grooming experience and every
-          owner peace of mind — one appointment at a time.
-        </p>
+            <div class="about-pillar">
+              <h2>Our Mission</h2>
+              <p>
+                To give every dog a safe, comfortable grooming experience and
+                every owner peace of mind — one appointment at a time.
+              </p>
+            </div>
+          </div>
+        </div>
 
         <div class="cta">
           <h3>Ready to Book Maple's Next Groom?</h3>
@@ -311,6 +377,7 @@
     </button>
 
     <script src="/nav-toggle.js" defer></script>
+    <script src="/bubbles.js" defer></script>
     <script src="/cart.js" defer></script>
     <script src="/back-to-top.js" defer></script>
     <script src="/follow-us.js" defer></script>
