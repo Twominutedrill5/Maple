@@ -9,17 +9,19 @@
       name="description"
       content="Grooming services and pricing at Maple's Dog Grooming — full bath and trim, nail trimming, puppy's first groom, and de-shedding. Add services to your cart and book online."
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Pacifico is self-hosted (see style.css) — no fonts.googleapis.com /
+         fonts.gstatic.com round trips. -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/pacifico-latin-400.woff2"
+      crossorigin
     />
+    <!-- Single stylesheet: bubbles/cart/back-to-top/follow-us/gallery/booking
+         CSS now live in style.css, so each page makes one CSS request
+         instead of up to six — fewer render-blocking round trips. -->
     <link rel="stylesheet" href="/style.css" />
-    <link rel="stylesheet" href="/bubbles.css" />
-    <link rel="stylesheet" href="/cart.css" />
-    <link rel="stylesheet" href="/back-to-top.css" />
-    <link rel="stylesheet" href="/follow-us.css" />
     <style>
       /* Closing CTA — a .band-cream card like the home page's; panel shape
          and text colors come from style.css. */

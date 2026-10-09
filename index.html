@@ -15,17 +15,29 @@
       content="Professional, gentle dog grooming — baths, full grooms, and nail trims."
     />
     <meta property="og:image" content="/assets/pup_comb.jpg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Pacifico is now self-hosted (see style.css) — no more
+         fonts.googleapis.com / fonts.gstatic.com round trips at all. -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/pacifico-latin-400.woff2"
+      crossorigin
     />
+    <!-- Single stylesheet: bubbles/cart/back-to-top/follow-us/gallery/booking
+         CSS now live in style.css, so each page makes one CSS request
+         instead of up to six — fewer render-blocking round trips. -->
     <link rel="stylesheet" href="/style.css" />
-    <link rel="stylesheet" href="/bubbles.css" />
-    <link rel="stylesheet" href="/cart.css" />
-    <link rel="stylesheet" href="/back-to-top.css" />
-    <link rel="stylesheet" href="/follow-us.css" />
+    <!-- Explicit LCP hint: the hero photo is the largest element painted on
+         load, so tell the browser to start fetching it immediately instead
+         of discovering it once it parses down into <body>. -->
+    <link
+      rel="preload"
+      as="image"
+      href="/assets/two_pups.avif"
+      type="image/avif"
+      fetchpriority="high"
+    />
     <style>
       /* Now a block inside the #trust card rather than its own section —
          no background or radius of its own, so it reads as the closing
@@ -191,10 +203,19 @@
           <p class="hero-stat">🐾 1,000+ happy pups groomed</p>
         </div>
         <div class="hero-media">
-          <img
-            src="/assets/two_pups.jpg"
-            alt="Groomer brushing out a large cream-coated dog in the salon"
-          />
+          <!-- This is the hero/LCP image: AVIF first (42% smaller than the
+               JPG), fetchpriority="high" + loading="eager" so the browser
+               fetches it immediately instead of discovering it late. -->
+          <picture>
+            <source srcset="/assets/two_pups.avif" type="image/avif" />
+            <img
+              src="/assets/two_pups.jpg"
+              alt="Two poodle puppies enjoying a bubble bath"
+              fetchpriority="high"
+              loading="eager"
+              decoding="async"
+            />
+          </picture>
         </div>
       </section>
 
@@ -304,23 +325,32 @@
       <section id="gallery-teaser" aria-labelledby="gallery-teaser-heading">
         <h2 id="gallery-teaser-heading">Recent Grooms</h2>
         <div class="gallery-strip">
-          <img
-            style="--focus: 15%"
-            src="/assets/poodle_trim.jpg"
-            alt="Standard poodle being trimmed on the grooming table"
-          />
-          <img
-            loading="lazy"
-            style="--focus: 15%"
-            src="/assets/husky_groom.jpg"
-            alt="Red-and-white husky after a full groom"
-          />
-          <img
-            loading="lazy"
-            style="--focus: 15%"
-            src="/assets/lab_shep_mix.jpg"
-            alt="Black Labrador-shepherd mix after a groom"
-          />
+          <picture>
+            <source srcset="/assets/poodle_trim.avif" type="image/avif" />
+            <img
+              style="--focus: 15%"
+              src="/assets/poodle_trim.jpg"
+              alt="Standard poodle being trimmed on the grooming table"
+            />
+          </picture>
+          <picture>
+            <source srcset="/assets/husky_groom.avif" type="image/avif" />
+            <img
+              loading="lazy"
+              style="--focus: 15%"
+              src="/assets/husky_groom.jpg"
+              alt="Red-and-white husky after a full groom"
+            />
+          </picture>
+          <picture>
+            <source srcset="/assets/lab_shep_mix.avif" type="image/avif" />
+            <img
+              loading="lazy"
+              style="--focus: 15%"
+              src="/assets/lab_shep_mix.jpg"
+              alt="Black Labrador-shepherd mix after a groom"
+            />
+          </picture>
         </div>
         <a href="/gallery.html" class="btn-secondary">View Full Gallery</a>
       </section>

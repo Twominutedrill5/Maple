@@ -9,17 +9,19 @@
       name="description"
       content="Meet Maple's Dog Grooming — our story, our approach to low-stress handling, and the groomer behind every appointment."
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Pacifico is self-hosted (see style.css) — no fonts.googleapis.com /
+         fonts.gstatic.com round trips. -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/pacifico-latin-400.woff2"
+      crossorigin
     />
+    <!-- Single stylesheet: bubbles/cart/back-to-top/follow-us/gallery/booking
+         CSS now live in style.css, so each page makes one CSS request
+         instead of up to six — fewer render-blocking round trips. -->
     <link rel="stylesheet" href="/style.css" />
-    <link rel="stylesheet" href="/bubbles.css" />
-    <link rel="stylesheet" href="/cart.css" />
-    <link rel="stylesheet" href="/back-to-top.css" />
-    <link rel="stylesheet" href="/follow-us.css" />
     <style>
       /* Keeps paragraphs from stretching edge-to-edge on wide screens —
          long unconstrained line lengths are a big part of what reads as
@@ -85,22 +87,19 @@
     <main>
       <section class="page-header band-cream">
         <h1 id="about-heading">About Us</h1>
-        <p>
-          Low-stress handling, patient hands, and genuine attention to every
-          dog's needs.
-        </p>
+        <p>Low-stress handling, patient hands, and genuine attention to every dog's needs.</p>
       </section>
 
       <section id="about" aria-labelledby="about-heading">
         <!-- PLACEHOLDER COPY — swap in the real story, names, and dates
              once the client confirms details. -->
         <p>
-          Maple's Dog Grooming started with a simple idea: every dog deserves to
-          feel calm, comfortable, and cared for during grooming — not rushed
-          through it. What began as grooming appointments for neighbors and
-          friends has grown into a full-service studio built on the same
-          philosophy: patient hands, low-stress handling, and genuine attention
-          to each dog's individual needs.
+          Maple's Dog Grooming started with a simple idea: every dog deserves
+          to feel calm, comfortable, and cared for during grooming — not
+          rushed through it. What began as grooming appointments for
+          neighbors and friends has grown into a full-service studio built
+          on the same philosophy: patient hands, low-stress handling, and
+          genuine attention to each dog's individual needs.
         </p>
 
         <img
@@ -110,24 +109,25 @@
 
         <h3>Our Approach</h3>
         <p>
-          We believe grooming should be a positive experience, not a stressful
-          one. Every appointment is paced to the dog in the chair — whether
-          that's a confident regular or a nervous first-timer — using gentle
-          handling, frequent breaks, and plenty of reassurance along the way.
+          We believe grooming should be a positive experience, not a
+          stressful one. Every appointment is paced to the dog in the chair
+          — whether that's a confident regular or a nervous first-timer —
+          using gentle handling, frequent breaks, and plenty of
+          reassurance along the way.
         </p>
 
         <h3>Meet the Groomer</h3>
         <p>
           [Placeholder: name, years of experience, certifications, and a
-          sentence or two on what got them into grooming — e.g. "Maple has been
-          grooming dogs for over 10 years and is certified in breed-specific
-          styling and canine first aid."]
+          sentence or two on what got them into grooming — e.g. "Maple has
+          been grooming dogs for over 10 years and is certified in
+          breed-specific styling and canine first aid."]
         </p>
 
         <h3>Our Mission</h3>
         <p>
-          To give every dog a safe, comfortable grooming experience and every
-          owner peace of mind — one appointment at a time.
+          To give every dog a safe, comfortable grooming experience and
+          every owner peace of mind — one appointment at a time.
         </p>
       </section>
 
@@ -181,7 +181,8 @@
       <p class="footer-nap">
         <span class="footer-name">Maple's Dog Grooming</span><br />
         123 Maple Street, Your Town, ST 00000<br />
-        <a href="tel:+15555555555">(555) 555-5555</a> &middot; Tue–Sat 9am–5pm
+        <a href="tel:+15555555555">(555) 555-5555</a> &middot; Tue–Sat
+        9am–5pm
       </p>
 
       <!-- Placeholder hrefs — swap in the real profile URLs. -->

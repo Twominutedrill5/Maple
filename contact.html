@@ -9,18 +9,19 @@
       name="description"
       content="Book an appointment at Maple's Dog Grooming. Pick your services and a time that works for you — we'll confirm by phone or email."
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Pacifico is self-hosted (see style.css) — no fonts.googleapis.com /
+         fonts.gstatic.com round trips. -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/pacifico-latin-400.woff2"
+      crossorigin
     />
+    <!-- Single stylesheet: bubbles/cart/back-to-top/follow-us/gallery/booking
+         CSS now live in style.css, so each page makes one CSS request
+         instead of up to six — fewer render-blocking round trips. -->
     <link rel="stylesheet" href="/style.css" />
-    <link rel="stylesheet" href="/bubbles.css" />
-    <link rel="stylesheet" href="/cart.css" />
-    <link rel="stylesheet" href="/booking.css" />
-    <link rel="stylesheet" href="/back-to-top.css" />
-    <link rel="stylesheet" href="/follow-us.css" />
   </head>
   <body>
     <header>
