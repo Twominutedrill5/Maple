@@ -91,3 +91,37 @@ After swapping colours, verify these pairs. Any contrast checker works
 To derive a new `--accent-ink`: keep the accent's hue and saturation and
 lower the lightness until it clears 4.5:1 on **both** the white and the cream
 surface. It stays recognisably the brand colour while being readable.
+
+## Before you deploy
+
+`npm run build` now runs `check-build.mjs` automatically and **fails the build**
+if the compiled site is broken. It catches the two mistakes that don't show up
+in `npm run dev`:
+
+1. **A page points at a file that isn't in `dist/`** — a dead stylesheet link, or
+   a `<script>` Vite didn't bundle.
+2. **A `.js` file writes an asset path as a plain string**, e.g.
+   `src: "/assets/dog.jpg"`. Vite renames asset files during a build and
+   rewrites the references it can see — but it can't see inside a string, so
+   that path breaks in production only. Import the image instead:
+
+   ```js
+   import dog from "./assets/dog.jpg";
+   // then use `dog` as the src
+   ```
+
+### Why this matters
+
+`npm run dev` serves your files straight from the project folder, so every path
+works. `npm run build` renames and relocates things. **Something can work
+perfectly in dev and be broken in the build** — so never deploy from a dev-server
+test alone.
+
+The habit:
+
+```
+npm run verify    # build + check + open the built site locally
+```
+
+Click through every page with the browser console open (F12). If the console is
+clean and the check passed, it's safe to `firebase deploy`.

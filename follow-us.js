@@ -6,6 +6,22 @@
 // always visible; while FOLLOW_URL is empty it simply renders without an
 // href, so it shows in the design without being a link that goes nowhere.
 
+// The rotation photos are imported rather than written as "/assets/x.jpg"
+// strings: Vite hashes asset filenames at build time and rewrites references
+// it can see, but it cannot rewrite a path hidden inside a string literal.
+// Importing them means each `src` below is the real built URL in production
+// and the plain path in dev.
+import twoPups from "./assets/two_pups.jpg";
+import poodleTrim from "./assets/poodle_trim.jpg";
+import pupComb from "./assets/pup_comb.jpg";
+import pitBath from "./assets/pit_bath.jpg";
+import puppyTrim from "./assets/puppy_trim.jpg";
+import huskyDeshedding from "./assets/husky_brush_deshedding.jpg";
+import labBrushed from "./assets/lab_brushed.avif";
+import dogBrush from "./assets/dog_brush.avif";
+import huskyGroom from "./assets/husky_groom.jpg";
+import labShepMix from "./assets/lab_shep_mix.jpg";
+
 (function () {
   // `focus` is the vertical focal point for the square crop — the default
   // centre lands on the dog's body in portrait shots and cuts the head off.
@@ -13,16 +29,16 @@
   // focusX  = horizontal focal point, for landscape shots where the dog
   //           stands off to one side and a centred square crop misses it.
   const GALLERY_IMAGES = [
-    { src: "/assets/two_pups.jpg", focus: "50%" },
-    { src: "/assets/poodle_trim.jpg", focus: "30%" },
-    { src: "/assets/pup_comb.jpg", focus: "50%", focusX: "60%" },
-    { src: "/assets/pit_bath.jpg", focus: "50%" },
-    { src: "/assets/puppy_trim.jpg", focus: "40%", focusX: "65%" },
-    { src: "/assets/husky_brush_deshedding.jpg", focus: "40%", focusX: "100%" },
-    { src: "/assets/lab_brushed.avif", focus: "50%", focusX: "75%" },
-    { src: "/assets/dog_brush.avif", focus: "50%" },
-    { src: "/assets/husky_groom.jpg", focus: "25%" },
-    { src: "/assets/lab_shep_mix.jpg", focus: "25%" },
+    { src: twoPups, focus: "50%" },
+    { src: poodleTrim, focus: "30%" },
+    { src: pupComb, focus: "50%", focusX: "60%" },
+    { src: pitBath, focus: "50%" },
+    { src: puppyTrim, focus: "40%", focusX: "65%" },
+    { src: huskyDeshedding, focus: "40%", focusX: "100%" },
+    { src: labBrushed, focus: "50%", focusX: "75%" },
+    { src: dogBrush, focus: "50%" },
+    { src: huskyGroom, focus: "25%" },
+    { src: labShepMix, focus: "25%" },
   ];
   const ROTATE_MS = 3000;
 

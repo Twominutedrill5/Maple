@@ -108,7 +108,7 @@
 
     if (cart.length === 0) {
       showError(
-        "Your cart is empty — please add at least one service from the Services page first."
+        "Your cart is empty — please add at least one service from the Services page first.",
       );
       return;
     }
@@ -129,7 +129,7 @@
     const [year, month, day] = dateVal.split("-").map(Number);
     const prettyDate = new Date(year, month - 1, day).toLocaleDateString(
       undefined,
-      { weekday: "long", month: "long", day: "numeric" }
+      { weekday: "long", month: "long", day: "numeric" },
     );
 
     // No endpoint yet — say so plainly rather than faking a confirmation,
@@ -137,7 +137,7 @@
     if (!BOOKING_ENDPOINT) {
       showError(
         "Demo only — online booking isn't connected yet, so this request " +
-          "hasn't been sent. Please call to book."
+          "hasn't been sent. Please call to book.",
       );
       return;
     }
@@ -163,7 +163,7 @@
       const today = new Date();
       dateInput.min = today.toISOString().split("T")[0];
       dateInput.addEventListener("change", () =>
-        generateSlotsForDate(dateInput.value)
+        generateSlotsForDate(dateInput.value),
       );
     }
 
